@@ -1,9 +1,7 @@
 # SIE-502: Ontological Modeling for Systems Engineering
 
-Course repository for **SIE-502 — Ontological Modeling for Systems Engineering**.
-
-This repo is where the weekly instructions, assignments, and project deliverables are
-published. Each week has its own page. Check back before every module.
+Weekly instructions, assignments, and project deliverables are published here. Check this
+repo before every module.
 
 ## Weekly Instructions
 
@@ -23,8 +21,8 @@ published. Each week has its own page. Check back before every module.
 | Running example: `sierra-method` | https://github.com/modelware/sierra-method |
 | Visual Studio Code | https://code.visualstudio.com/download |
 | Node.js | https://nodejs.org/ |
-| GitHub Copilot for students | https://github.com/education/students |
+| Gemini for Students | https://gemini.google/students/ |
 
 ## Getting Help
 
-Send me by email: melaasar@modelware.io
+Email me: melaasar@modelware.io

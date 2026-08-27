@@ -1,326 +1,218 @@
 # Week 1 — Ontological Modeling for Systems Engineering
 
-Welcome to SIE-502. This page walks you through setting up the toolchain and tells you
-exactly what to submit before Module 2.
+Set up the toolchain and submit two deliverables before Module 2.
 
----
+**Due before Module 2:**
 
-## Before Module 2 — Do This Now
+1. [Assignment 1 — Tool Setup](#assignment-1--tool-setup) — install the tools, run the
+   example, screenshot everything.
+2. [Deliverable 1 — Project Scope](#deliverable-1--project-scope--problem-statement) — 1–2
+   pages on the system you propose to model.
 
-Two things are due before the next class:
-
-1. **[Assignment 1 — Tool Setup + Running Example](#4-assignment-1--tool-setup--running-example).**
-   Install the tooling, clone the running example, run the CLI, and capture screenshots.
-2. **[Project Deliverable 1 — Project Scope & Problem Statement](#5-project-deliverable-1--project-scope--problem-statement).**
-   One to two pages describing the system you propose to model and the questions your
-   model should answer.
-
-> **Start the setup early.** Two steps have waiting periods outside your control: GitHub
-> Copilot student verification can take a few days, and OML Code login only works after
-> your GitHub email has been added to the course authorization list. Begin with
-> [Step 0 — Send me your GitHub email](#step-0--send-me-your-github-email) and
-> [Step 6 — Sign up for GitHub Copilot](#step-6--sign-up-for-github-copilot-student-plan)
-> today.
+> **Start today.** [Step 0](#step-0--send-me-your-github-email) gates every login step, and
+> AI assistant sign-up ([Step 6](#step-6--get-an-ai-coding-assistant)) can take days to
+> approve.
 
 ---
 
 ## 1. The Toolchain
 
-We use two pieces of tooling plus an AI assistant:
-
-- **OML Code** — a VS Code extension; the IDE for working with the OML language.
-- **OML CLI** — the command-line counterpart, used for lint / validate / reason / render.
-- **GitHub Copilot** — the generative-AI side of the neurosymbolic workflow, used from
-  inside VS Code.
-
-And one repository:
-
-- **`sierra-method`** — the running example we will grow all semester. It is the Fireforce
-  project: a method, a vocabulary, and a system description modeled in OML.
+- **OML Code** — VS Code extension; the IDE for the OML language.
+- **OML CLI** — command line: lint / validate / reason / render.
+- **An AI coding assistant** — the generative half of the neurosymbolic workflow.
+- **`sierra-method`** — the running example we grow all semester (the Fireforce project:
+  a method, a vocabulary, and a system description in OML).
 
 ---
 
-## 2. Setup Instructions
-
-Work through these in order. Steps 0 and 6 have waiting periods, so start with those today.
+## 2. Setup
 
 ### Step 0 — Send me your GitHub email
 
-**Do this first — everything else waits on it.**
+**Do this first — the OML Code logins wait on it.**
 
-OML Code requires authentication, and login only works once your identity has been added
-to the course authorization list.
+1. No GitHub account? Sign up: https://github.com/join
+2. Go to **Settings → Emails** (https://github.com/settings/emails) and copy your
+   **primary** address.
+3. Email your name and that address to **melaasar@modelware.io**. I will authorize you and
+   confirm back.
 
-1. If you don't have a GitHub account, sign up: https://github.com/join
-2. Go to **Settings → Emails** (https://github.com/settings/emails).
-3. Find the address marked **primary** and copy it.
-4. **Email me your name and that primary GitHub email** at
-   **melaasar@modelware.io**. I will add you to the OML Code authorization and confirm
-   back to you.
+Steps 5 and 7 will not succeed until you get that confirmation.
 
-Until you get that confirmation, the login steps (5 and 7 below) will not succeed.
+### Step 1 — Install VS Code
 
-### Step 1 — Install Visual Studio Code
-
-Download for your operating system: https://code.visualstudio.com/download
+https://code.visualstudio.com/download
 
 ### Step 2 — Install the OML Code extension
 
-1. Open VS Code.
-2. Open the **Extensions** tab (the square icon in the left sidebar, or `Cmd/Ctrl+Shift+X`).
-3. Search for **`OML Code`**. It should be the first result.
-4. Click **Install**.
-5. Leave **auto-update enabled** so you pick up new versions during the course.
-
-The current version is `0.25.1` — just install the latest.
-
-More about the tool and short feature demos: https://www.modelware.io/oml-code
+In VS Code, open **Extensions** (`Cmd/Ctrl+Shift+X`), search **`OML Code`** (first result),
+click **Install**, and leave auto-update on. Details and demos:
+https://www.modelware.io/oml-code
 
 ### Step 3 — Install Node.js
 
-The OML CLI needs Node.js **v20 or later**.
-
-1. Open a terminal. In VS Code: **View → Terminal** (or ``Ctrl+` ``).
-2. Check what you have:
-   ```bash
-   node --version
-   ```
-3. If Node is missing or older than v20, install it from https://nodejs.org/ (the site
-   walks you through your operating system), then re-run the check.
-
-A wrong Node version is the single most common cause of a failed CLI install, so confirm
-this before moving on.
+The CLI needs **v22.18.0 or later**. Check with `node --version`; if missing or older, install
+from https://nodejs.org/ and re-check. A wrong Node version is the most common cause of a
+failed CLI install.
 
 ### Step 4 — Install the OML CLI
 
-In the terminal:
-
 ```bash
 npm install -g @oml/cli
-```
-
-This takes a few seconds. A couple of warnings are normal and can be ignored — you are
-looking for a **success** message at the end. Verify:
-
-```bash
 oml --version
 ```
 
-If the install fails, re-check your Node version (Step 3) first.
+A few warnings are normal — look for a success message. If it fails, re-check Step 3.
 
 ### Step 5 — Clone the running example
-
-Clone the `sierra-method` repository: https://github.com/modelware/sierra-method
 
 ```bash
 git clone https://github.com/modelware/sierra-method.git
 ```
 
-You need `git` installed for this. If you don't have it, install it from
-https://git-scm.com/downloads. If you have never cloned a repository before, GitHub's
-guide covers every method (HTTPS, SSH, GitHub CLI, Desktop):
+Need git? https://git-scm.com/downloads. Never cloned before?
 https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
 
-Then open it in VS Code: **File → Open Folder…** and select the folder you just cloned.
-You should see the `sierra-method` project tree in the sidebar.
+Then **File → Open Folder…** in VS Code and select the cloned folder.
 
-### Step 6 — Sign up for GitHub Copilot (student plan)
+### Step 6 — Get an AI coding assistant
 
-Apply for the **GitHub Student Developer Pack**, which includes Copilot:
-https://github.com/education/students
+Any assistant works; you just need access to one. Options:
 
-**Do this early** — student verification can take a few days. The plan gives you credits
-we will use for the AI component of the course.
+- **Gemini for Students** — free for students: https://gemini.google/students/
+- Any free or paid tier of **Claude**, **Codex**, or **Gemini**.
 
-### Step 7 — Log in to OML Code (extension and CLI)
+> **Note:** GitHub Copilot for Students is not accepting new accounts right now, so use one
+> of the above instead.
 
-**Extension.** The first time you open the `sierra-method` folder, OML Code detects that you
-are not signed in and prompts you:
+Sign up early — student verification can take several days.
 
-1. Click **Log in**, then **Allow**.
-2. Your browser opens. Choose **Continue as `<your username>`**.
-3. It asks for a code. Switch back to VS Code, **copy the code shown there**, paste it into
-   the browser, and continue.
-4. Click **Authorize**.
+### Step 7 — Log in to OML Code
 
-**CLI.** In the terminal, from inside the cloned repo:
+**Extension.** Opening `sierra-method` prompts you to sign in: click **Log in** → **Allow**
+→ **Continue as `<username>`**, copy the code shown in VS Code, paste it into the browser,
+and **Authorize**.
+
+**CLI.** From inside the repo:
 
 ```bash
 oml login
 ```
 
-This prints a URL and a code. Open the URL, authenticate, paste the code, and authorize.
-Give it a couple of seconds and it will report that you are signed in.
+Open the printed URL, authenticate, paste the code, authorize.
 
-> Both logins only work **after** I have confirmed your email is authorized (Step 0).
+> Both logins require the confirmation from Step 0.
 
 ---
 
-## 3. Smoke Tests — Verify Your Setup
+## 3. Smoke Tests
 
-Run all of these. They are also the evidence you will screenshot for Assignment 1.
+Run all of these — they are also your Assignment 1 screenshots.
 
-### 3.1 Browse the model in OML Code
+**3.1 Browse the model.** Open the repo's `README` — OML Code renders it as a rich view.
+Click **Start** (Fireforce is the project), then **Browse → sierra-method →** the steps of
+the method, then the **first step**. A rendered table means the extension works.
 
-1. Open the `README` at the root of the repo. If OML Code is working, it renders as a
-   rich view rather than plain text.
-2. Click **Start**. **Fireforce** is the project we will model.
-3. Click **Browse** → **sierra-method** → open the **steps of the method**.
-4. Click into the **first step**. **If you see a rendered table there, your extension is
-   working.** Browse around — this is the material we will walk through in the course.
+**3.2 Vocabulary diagram.** In `src/method.oml` → **sierra-method**, pick an ontology (e.g.
+the mission vocabulary) → **right-click → Open Diagram**. Double-click elements to jump to
+the model.
 
-### 3.2 Open a vocabulary diagram
+**3.3 Description diagram.** In the model OML sources → **context analysis** →
+**objectives** → **right-click → Show Diagram**. You should see the mission objectives and
+the concerns they relate to.
 
-1. Go to `src/method.oml` (the method OML sources) → **sierra-method**.
-2. Pick an ontology — for example the **mission vocabulary**.
-3. **Right-click → Open Diagram.**
-4. You get a visualization of the vocabulary. Double-click elements to jump to the
-   corresponding model elements.
-
-### 3.3 Open a description diagram
-
-1. Go to the model OML sources → **context analysis** → pick **objectives**.
-2. **Right-click → Show Diagram.**
-3. You should see your system description: the objectives of the mission and how they
-   relate to the concerns they address or pursue.
-
-### 3.4 Run the CLI
-
-From the root of the cloned repo, each of these should succeed:
+**3.4 Run the CLI.** From the repo root, all four should succeed:
 
 ```bash
-oml lint
-oml validate
-oml reason
-oml render
+oml lint      # style / well-formedness
+oml validate  # model against the language rules
+oml reason    # DL reasoner — confirm no inconsistencies
+oml render    # generates web views into build/web
 ```
 
-- `oml lint` — checks style/well-formedness.
-- `oml validate` — checks the model against the language rules.
-- `oml reason` — runs the description logic reasoner. **Confirm it reports no
-  inconsistencies.**
-- `oml render` — generates the web views into a `build/web` folder.
+Then open `build/web` in Finder/Explorer and double-click the entry point — the same views,
+now as a static site.
 
-Then open the rendered output: find `build/web` in Finder/Explorer and double-click the
-entry point to open it in your browser. You should see the same views you were browsing in
-VS Code, now as a static site.
-
-### 3.5 Ask the AI a question
-
-1. Open the AI panel in OML Code and go to the **Chat** tab. (You may not see every tab
-   shown in the lecture — don't worry about the others; Chat is the one you need.)
-2. Click the **`+`** to start a conversation.
-3. Ask something answerable from the model, for example:
-   > What are the stakeholders in the model?
-4. Wait for the answer, then **check it against the model.** The README lists the
-   stakeholders directly from the model — compare the two. In the demo, the AI reported
-   five stakeholders and the model had five, so it told the truth *that time*.
-
-That verification habit is the point: the LLM drafts, you check it against the model. Later
-in the course we will use the AI not only to ask questions but to help modify the model.
+**3.5 Ask the AI a question.** Open the AI panel in OML Code, go to the **Chat** tab, click
+**`+`**, and ask something answerable from the model, e.g. *"What are the stakeholders in
+the model?"* Then **check the answer against the model** — the README lists the stakeholders
+directly. That habit is the point: the LLM drafts, you verify.
 
 ---
 
-## 4. Assignment 1 — Tool Setup + Running Example
+## Assignment 1 — Tool Setup
 
 **Due before Module 2. Graded on completion.**
 
-### Checklist
-
-- [ ] Sign up for the GitHub Copilot student plan
 - [ ] Email your name and primary GitHub email to melaasar@modelware.io, and get confirmation
-- [ ] Install VS Code
-- [ ] Install the OML Code extension
-- [ ] Install Node.js (v20+) and the OML CLI
-- [ ] Clone the running example repository and open it in VS Code
-- [ ] Log in to OML Code — both the extension and the CLI
-- [ ] Run the OML CLI tools and confirm the project builds with no errors
-- [ ] Confirm the reasoner reports no inconsistencies
-- [ ] Open the markdown/web views and inspect that they render fine
-- [ ] Open the diagrams (a vocabulary and a description)
-- [ ] Open GitHub Copilot / the AI chat and ask a question about the model
-- [ ] **Take screenshots as evidence of every step**
+- [ ] Get access to an AI coding assistant
+- [ ] Install VS Code and the OML Code extension
+- [ ] Install Node.js (v22.18.0+) and the OML CLI
+- [ ] Clone the running example and open it in VS Code
+- [ ] Log in to OML Code — extension and CLI
+- [ ] Run `oml lint`, `validate`, `reason` (no inconsistencies), `render`
+- [ ] Open the rendered web views
+- [ ] Open both diagrams (a vocabulary and a description)
+- [ ] Ask the AI chat a question about the model
+- [ ] **Screenshot every step**
 
-### What to submit
+**Submit:** a single **ZIP** of your screenshots, one per step.
 
-A single **ZIP file** containing your screenshots — one for each step above — showing that
-you installed the tools successfully on your machine and that the smoke tests pass.
-
-### Why this matters
-
-Module 2 assumes a working environment: **you write OML in the first ten minutes.** Setup
-issues are environment-specific — OS, Node version, permissions — and they take a day, not
-an hour. Post on Piazza as soon as you get stuck; somebody has hit your exact error. Help
-is available now, not the night before.
+Module 2 assumes a working environment — **you write OML in the first ten minutes.** Setup
+problems are environment-specific and take a day, not an hour. Post on Piazza as soon as you
+get stuck.
 
 ---
 
-## 5. Project Deliverable 1 — Project Scope & Problem Statement
+## Deliverable 1 — Project Scope & Problem Statement
 
-**One to two pages. Due before Module 2.**
-
-Write a short report proposing your project: the domain you want to work in and the system
-you want to model in that domain. Structure it in five sections.
+**1–2 pages. Due before Module 2.** Propose your project: the domain and the system you want
+to model. Five sections:
 
 | # | Section | What I am looking for |
 | --- | --- | --- |
 | 1 | **The system** | What it is, its boundary, and explicitly what is *outside* it |
-| 2 | **Stakeholders** | Who cares about this system, and what each needs to know |
-| 3 | **The questions** | 3 to 5 specific questions your model should answer |
+| 2 | **Stakeholders** | Who cares, and what each needs to know |
+| 3 | **The questions** | 3–5 specific questions your model should answer |
 | 4 | **Why it is hard** | Where knowledge is fragmented, ambiguous, or tacit today |
-| 5 | **Available data** | Existing documents, spreadsheets, or models to draw on |
+| 5 | **Available data** | Documents, spreadsheets, or models you will draw on |
 
-### Section 3 is the one I will push back on
+**Section 3 is the one I will push back on.** Write questions in plain English as *"I am
+modeling this system so that I can analyze X / derive insight Y,"* and name the stakeholder
+each one is for.
 
-Write the questions in plain English, framed as *"I am modeling this system so that I can
-analyze X / derive insight Y."* Then say **who each question is for** — the stakeholder who
-benefits from the answer.
-
-| Weak question | Strong question |
+| Weak | Strong |
 | --- | --- |
 | "What are the components?" | "Which components are affected if the payload interface changes?" |
 | "How does it work?" | "Is every safety requirement traced to a verification activity?" |
 | "What is the architecture?" | "Which subsystems exceed their mass budget allocation?" |
 
-Strong questions are **specific, cross-cutting, and currently hard to answer**. They become
-your model's acceptance criteria.
+Strong questions are specific, cross-cutting, and currently hard to answer. They become your
+model's acceptance criteria.
 
-### Two more things
-
-- **Section 4 — why is this hard without modeling?** What stops you from solving this
-  another way today?
-- **Section 5 — what material will you actually work with?** Documents, spreadsheets,
-  examples you have seen elsewhere. Give me some background on what you are drawing from.
-
-**Choose a domain you actually know.** You will build on this proposal all semester: each
-week we take an aspect of developing a methodology with OML Code, and you do something
-similar for your own project. Weekly assignments stay focused on the case study so the
-concepts land first; the project is where you apply them. I will give you feedback on this
-proposal before you build on it.
+**Choose a domain you actually know.** You build on this proposal all semester: weekly
+assignments stay on the case study so the concepts land, and the project is where you apply
+them. I will give you feedback before you build on it.
 
 ---
 
-## 6. Further Reading
+## Further Reading
 
-None of this is required before the next class — these are the references you will use
-going forward.
+Not required before the next class.
 
 | Ref | Source | Why |
 | --- | --- | --- |
-| REF01 | [OML Language Specification](https://opencaesar.io/oml/) | Skim now; you will live in it from Module 2. It is the manual for OML syntax and semantics — a reference, not a read-through |
-| REF02 | [OML Tutorials](https://opencaesar.io/oml-tutorials/) | **Do tutorials 1 and 2** — enough to get a good flavor of OML. See the note below |
-| REF03 | [OML overview paper (ISWC 2026)](https://www.modelware.io/assets/papers/iswc-2026-oml-semantic-web-mbse.pdf) | Rationale, overview, and design decisions behind OML. Published this year at a semantic web conference |
-| REF04 | [OML Code](https://www.modelware.io/oml-code) | Home of the tool we use in class — feature pages and short demos |
-| REF05 | [openCAESAR](https://opencaesar.io/) | The open source counterpart: papers, blogs, and recorded talks from conferences and workshops. Worth browsing to see the industry community behind this work |
+| REF01 | [OML Language Specification](https://opencaesar.io/oml/) | The manual for OML syntax and semantics — a reference, not a read-through |
+| REF02 | [OML Tutorials](https://opencaesar.io/oml-tutorials/) | **Do tutorials 1 and 2** for a flavor of OML (see note) |
+| REF03 | [OML overview paper (ISWC 2026)](https://www.modelware.io/assets/papers/iswc-2026-oml-semantic-web-mbse.pdf) | Rationale and design decisions behind OML |
+| REF04 | [OML Code](https://www.modelware.io/oml-code) | Home of the tool we use — feature pages and demos |
+| REF05 | [openCAESAR](https://opencaesar.io/) | The open source counterpart: papers, blogs, recorded talks |
 
-> **Note on the tutorials (REF02):** they are written against the openCAESAR open source
-> tooling, not OML Code. Install that tooling and follow along if you want — the concepts
-> transfer, and nearly everything there can also be done in OML Code. We will use **OML
-> Code** for the rest of the course.
+> **On REF02:** the tutorials target the openCAESAR open source tooling, not OML Code. The
+> concepts transfer and nearly everything there works in OML Code, which is what we use for
+> the rest of the course.
 
 ---
 
-## Next Module
-
-**Module 2 — Modeling Languages: OML in Depth.** We stop talking about ontologies and start
-writing one.
+**Next: Module 2 — Modeling Languages: OML in Depth.** We stop talking about ontologies and
+start writing one.

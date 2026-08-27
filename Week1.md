@@ -96,7 +96,7 @@ this before moving on.
 In the terminal:
 
 ```bash
-npm install -g @modelware/oml-cli
+npm install -g @oml/cli
 ```
 
 This takes a few seconds. A couple of warnings are normal and can be ignored — you are

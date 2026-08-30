@@ -133,10 +133,10 @@ oml render    # generates web views into build/web
 Then open `build/web` in Finder/Explorer and double-click the entry point — the same views,
 now as a static site.
 
-**3.5 Ask the AI a question.** Open the AI panel in OML Code, go to the **Chat** tab, click
-**`+`**, and ask something answerable from the model, e.g. *"What are the stakeholders in
+**3.5 Ask the AI a question.** Open your AI **Chat** (or whatever it's called for your AI agent) panel 
+in VS Code, click **`+`**, and ask something answerable from the model, e.g. *"What are the stakeholders in
 the model?"* Then **check the answer against the model** — the README lists the stakeholders
-directly. That habit is the point: the LLM drafts, you verify.
+directly. That habit is the point: the LLM drafts, you (and formal tools) verify.
 
 ---
 

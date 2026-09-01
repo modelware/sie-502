@@ -5,12 +5,12 @@ You have a working environment. Now you write OML.
 **Due before Module 3:**
 
 1. [Assignment 2 — Extend Fire Force VI](#assignment-2--extend-fire-force-vi) — extend the
-   Mission Control description using only this module's constructs.
+   shared Mission Control example using only this module's constructs.
 
 **Due before Module 4:**
 
-2. [Deliverable 2 — Vocabulary and Basic Model](#deliverable-2--vocabulary-and-basic-model) —
-   your own vocabulary plus a first system model.
+2. [Project Deliverable 2 — Initial Vocabulary and Description](#project-deliverable-2--initial-vocabulary-and-description) —
+   the first OML for **your own project**: an initial vocabulary and a description.
 
 > **New this week: you submit a commit, not a ZIP.** [Step 1](#step-1--fork-dont-just-clone)
 > changes how you work with the repo — fork it, so you can commit. Do that before you write
@@ -18,91 +18,12 @@ You have a working environment. Now you write OML.
 
 ---
 
-## 1. What This Module Covered
-
-Six constructs. Everything else in OML builds on them.
-
-| # | Construct | Keyword | What it does |
-| --- | --- | --- | --- |
-| 1 | **Specialization** | `<` | Subset relationship between concepts — builds a taxonomy |
-| 2 | **Scalar properties** | `scalar property` | Attaches a *literal* value (string, double, enum) |
-| 3 | **Relations** | `relation` | Attaches another *instance* — builds the knowledge graph |
-| 4 | **Instances** | `instance`, `ref` | The actual system model; asserts types, values, relations |
-| 5 | **Cardinality restrictions** | `restricts`, `functional` | Constrains how many values are allowed |
-| 6 | **Patterns** | (composition) | Containment, aggregation, connectivity, traceability |
-
-### The four ideas that trip people up
-
-These are the ones worth re-reading before you start the assignment.
-
-**1. Specialization is a subset relationship, not code inheritance.** `Signal < Item` means
-*every* instance of `Signal` is an instance of `Item` — always, not usually. It is not
-containment, and it is not equivalence. Unlike a programming language, a cycle is not an
-error: if you assert `A < B` and `B < A`, the reasoner concludes `A` and `B` are equivalent
-classes. Multiple specialization is normal.
-
-**2. Domain and range are inference opportunities, not constraints.** This is the big one.
-If `mass` has `domain PhysicalPart` and you assert a mass on something, the reasoner does
-**not** complain that the thing isn't a physical part — it *concludes* that it must be one.
-You will notice this when your element starts appearing in views you did not expect.
-
-```
-scalar property priority [ domain Prioritized  range Priority  functional ]
-```
-
-Read that as *"anything I put a priority on is thereby Prioritized"* — not as *"only
-Prioritized things may have a priority."*
-
-**3. Open world: absent does not mean false.** If you don't state a value, the reasoner
-concludes *unknown*, not *missing*. So a `minimum 1` restriction will **not** fire just
-because you left a value out. Maximum restrictions are easy to enforce (two distinct values
-contradict `maximum 1`); minimum restrictions are not. That is what `oml validate` and SHACL
-are for — validation is closed-world, reasoning is open-world.
-
-**4. Different names do not mean different things.** Given a `functional` relation and two
-asserted values, the reasoner takes the path of least resistance and infers the two
-instances are *the same individual* — rather than flagging an error. The `oml reason` CLI
-enables the unique names assumption by default (`-u`), which is what makes it flag the
-contradiction instead.
-
-### Declaring vs. restricting
-
-Declaring a property or relation gives you the default multiplicity — `0..*`. Nothing is
-required, and any number is allowed.
-
-| To say... | Use | Where |
-| --- | --- | --- |
-| At most one value, globally | `functional` | On the relation/property declaration |
-| At most one value, other direction | `inverse functional` | On the relation declaration |
-| At least one value of type T | `restricts some p to T` | On the concept |
-| Every value must be of type T (zero OK) | `restricts all p to T` | On the concept |
-| An explicit count | `restricts p to min/max/exactly N` | On the concept |
-
-`exactly N` is sugar for minimum and maximum at the same value.
-
-> **A word on minimum restrictions.** Be careful putting them in a vocabulary. An
-> inconsistent model blocks *all* downstream analysis — garbage in, garbage out. Early in a
-> project your model is legitimately incomplete, and demanding completeness as a
-> consistency gate stops you from working. Enforce **integrity** with the reasoner (a person
-> with two social security numbers is plainly wrong); check **completeness** with validation
-> (a requirement with no verification yet is merely unfinished).
-
-### The Sierra taxonomy, in one sentence
-
-Sierra's `base.oml` defines abilities as aspects — `Element` (can have a `description`),
-`Expressible` (an `expression`), `Prioritized` (a `priority`), `Categorized` (a `category`),
-`Container` / `Contained` — and every concept specializes the abilities it needs. That is why
-asserting `R1 : Requirement` entails that `R1` is also `Categorized`, `Prioritized`,
-`Expressible`, and an `Element`.
-
----
-
-## 2. Seeing What the Reasoner Sees
+## 1. Seeing What the Reasoner Sees
 
 You write assertions. The reasoner adds **entailments**. To look at them:
 
 ```bash
-oml start                 # the CLI needs a running server (or open the folder in VS Code)
+# open the project folder in VS Code first — the extension starts the server for you
 oml export -o build/owl   # your assertions, translated to OWL/Turtle
 oml reason  -o build/owl  # the same, plus a *.ttl of what the reasoner inferred
 ```
@@ -116,7 +37,7 @@ Do this once by hand. It is the fastest way to internalize what your statements 
 
 ---
 
-## 3. Setup for This Week
+## 2. Setup for This Week
 
 ### Step 1 — Fork, don't just clone
 
@@ -159,70 +80,6 @@ Read at least these five files before starting:
 
 ---
 
-## 4. The Patterns You Are Extending
-
-Four patterns recur throughout Sierra. Recognize them and the assignment writes itself.
-
-### Containment — one parent, many children
-
-```
-instance Payload : component:Component [
-    base:description "Wildfire Detection Payload"
-    base:isContainedBy FireSat
-]
-```
-
-`Contains` is declared `inverse functional`: a thing has **at most one** container. That
-single flag is what makes the containment tree a tree, and what makes the decomposition view
-possible. You assert one direction; the reasoner infers `contains` the other way.
-
-### Aggregation — grouping, not containment
-
-Aggregation is a grouping hierarchy used for roll-ups (mass, cost, power). Unlike
-containment it is *not* functional — an element can belong to several groups, and you can
-build a logical hierarchy (say, by safety concern) that differs from the physical one.
-
-### Connectivity — components, ports, connections, items
-
-The full pattern, and the one Assignment 2 leans on hardest:
-
-```
-ref instance components:Platform [
-    component:hasPort Platform.Power_Out
-]
-instance Platform.Power_Out : component:Port [ component:direction "Out" ]
-
-relation instance Conn_PlatformPower_to_Payload : component:Connection [
-    from Platform.Power_Out
-    to   Payload.Power_In
-    component:transfers ElectricalPower
-]
-```
-
-Three things to copy exactly: the port naming convention `Component.Port_Name`, a
-`direction` on every port, and a `transfers` on every connection. A port with no direction
-and a connection that transfers nothing both *validate* — and both are meaningless.
-
-### Traceability — multi-hop, and where the analysis value is
-
-There is no direct relation from a `Requirement` to a `Concern`. The trace runs **through the
-stakeholder**:
-
-```
-Requirement --isStatedBy--> Stakeholder --expresses--> Concern
-                                                          |
-                                                       derives
-                                                          v
-Capability <--requires-- Objective <--pursues-- Mission
-```
-
-Every one of those relations has a declared `reverse`, so the reasoner populates both
-directions and you can query from either end. This chain is what answers *"if this
-stakeholder leaves, which requirements go with them?"* — the reason for declaring relations
-at all instead of writing prose in a description field.
-
----
-
 ## Assignment 2 — Extend Fire Force VI
 
 **Due before Module 3.** Extend a portion of the Mission Control model using only this
@@ -237,7 +94,7 @@ is **description-layer work**: use the existing Sierra vocabularies, do not modi
 | 2 | **Ports** on 2+ of them, each with a `direction` | Follow the `Component.Port_Name` convention |
 | 3 | **2+ connections** between ports; say what each `transfers` | Read `connections.oml` first |
 | 4 | **2 requirements**, each `isStatedBy` a real stakeholder | Use `stakeholders.oml` |
-| 5 | **Trace one requirement** to a concern and a capability | The multi-hop pattern above |
+| 5 | **Trace one requirement** to a concern and a capability | Follow an existing chain in `requirements.oml` |
 | 6 | **Masses** on new physical parts via `ref instance` | Leaves only — no roll-ups |
 | 7 | **Build clean** | The graded bar |
 
@@ -249,7 +106,8 @@ is **description-layer work**: use the existing Sierra vocabularies, do not modi
 
 ### The three gates
 
-Run all three after every few edits, not once at the end.
+Run all three after every few edits, not once at the end. Run them in the VS Code integrated
+terminal, so the extension's server is already there to answer.
 
 ```bash
 oml lint      # syntax and well-formedness
@@ -279,10 +137,14 @@ validates*.
 
 ---
 
-## Deliverable 2 — Vocabulary and Basic Model
+## Project Deliverable 2 — Initial Vocabulary and Description
 
-**Due before Module 4** (not this week — you get Module 3 first). Building directly on your
-Module 1 scope statement. This is your own project, in your own repo.
+**Due before Module 4** (not this week — you get Module 3 first).
+
+This is the **project** track, not the assignment track: your own system, your own repo, built
+on the scope statement you wrote for Project Deliverable 1. Nothing here touches
+`sierra-method` — you start a new project from scratch and grow it every module for the rest of
+the semester.
 
 ### Starting the repo
 
@@ -291,42 +153,98 @@ mkdir my-project && cd my-project
 oml init
 ```
 
-`oml init` scaffolds into the **current** folder — it does not take a project name and will
-not create the directory for you, so make the folder first; its name seeds the defaults.
-Five prompts, each with a default in brackets:
+`oml init` scaffolds into the **current** folder, so make the folder first — its name seeds the
+defaults. Press Enter through all five prompts except **Base IRI**, which you set to
+`http://www.example.com/method`. (Accepting `both` for the last one gives you a vocabulary *and*
+a description.)
 
-| Prompt | Default for a folder named `my-project` |
+The base IRI is a prefix — init appends `/vocabulary` and `/description` — so you get
+`http://www.example.com/method/vocabulary#`. An IRI *names* an ontology, it is not an address:
+nothing is fetched, the domain need not exist, everything runs locally. Rename it later if you
+like, keeping the folders in step.
+
+### Open it in VS Code — before any other command
+
+**File → Open Folder…** on `my-project`, the folder holding `.oml/`. The OML Code extension
+starts the server for you: no `oml start`, no port, no login. Do this first — every `oml`
+command needs that server, and without it `oml lint` just answers `start server first`.
+
+Run the CLI from the window's **integrated terminal** (Terminal → New Terminal); a shell
+started elsewhere will not find the server.
+
+### Separate the method from the model
+
+Init put both files in one tree. Split them the way Sierra does — vocabulary (your *method*)
+under `src/method`, description (your *model*) under `src/model`.
+
+**1. Give the description its own IRI.** Open `src/oml/example.com/my-project/description.oml`
+and change the namespace on line 3 — `method` becomes `project`:
+
+```diff
+-description <http://www.example.com/method/description#> as myproject-desc {
++description <http://www.example.com/project/description#> as myproject-desc {
+```
+
+Leave the rest of the file alone, including the `uses` line pointing at the vocabulary.
+
+**2. Move the files.**
+
+```bash
+mkdir -p src/method/oml/www.example.com/method
+mkdir -p src/model/oml/www.example.com/project
+
+mv src/oml/example.com/my-project/vocabulary.oml  src/method/oml/www.example.com/method/
+mv src/oml/example.com/my-project/description.oml src/model/oml/www.example.com/project/
+rm -rf src/oml
+```
+
+**3. Check it.** Your project should now look exactly like this — seven files, and no `src/oml`
+left over:
+
+```
+my-project/
+├── .gitignore
+├── .mcp.json
+├── .vscode/
+│   └── settings.json
+├── .oml/
+│   └── settings.yml
+├── README.md
+└── src/
+    ├── method/
+    │   └── oml/
+    │       └── www.example.com/
+    │           └── method/
+    │               └── vocabulary.oml
+    └── model/
+        └── oml/
+            └── www.example.com/
+                └── project/
+                    └── description.oml
+```
+
+The two `.oml` files are the ones you work in; the rest is project configuration you can leave
+alone. Their namespaces:
+
+| File | Namespace |
 | --- | --- |
-| Project title | `My Project` |
-| Package name | `@oml/my-project` |
-| Base IRI (namespace) | `https://example.com/my-project` |
-| Description | `The My Project ontologies.` |
-| Initial contents | `both` (vocabularies / descriptions / both) |
+| `…/method/oml/www.example.com/method/vocabulary.oml` | `http://www.example.com/method/vocabulary#` |
+| `…/model/oml/www.example.com/project/description.oml` | `http://www.example.com/project/description#` |
 
-**Override the base IRI** — the default is an `example.com` placeholder. Use something you
-control, the way Sierra uses `www.modelware.io` for the method and `fireforce6.github.io` for
-the model.
+Each path after its `oml/` folder reads back as the IRI. **That is the whole rule**: a namespace
+is derived from the segments after the deepest `oml` folder — which is why `method/` and `model/`
+*in front* of the anchor change nothing. If the two ever disagree the ontology cannot be found,
+and the error surfaces in the file that *imports* it, so check folder names first.
 
-`oml init -y` accepts all defaults; `-k both` presets the contents; `-f` overwrites instead
-of skipping. Init refuses to run if `.oml/settings.yml` already exists unless you pass `-f`.
+Then `oml lint`, which should report `11 OML file(s) checked` — your two, plus nine core
+vocabularies that live inside the language server rather than in your project.
 
-One rule matters more than the rest: **an ontology's namespace comes from its file path**,
-relative to the nearest ancestor folder named `oml`.
+That is your **first working base**: it loads, lints, and reasons. Part A fills in
+`vocabulary.oml` and Part B fills in `description.oml`, replacing the placeholder `Component` /
+`ComponentA` content with your own. To add further ontologies as you go, use **Source Explorer →
+right-click → New Ontology…**, which derives the namespace and prefix for you.
 
-```
-src/oml/acme/sensors/Sensor.oml   →   http://acme/sensors/Sensor#
-```
-
-Keep that in mind and your folder tree stays in sync with your IRI space automatically. To
-add ontologies later, use **Source Explorer → right-click a folder → New Ontology…**, which
-asks for kind (vocabulary, vocabulary bundle, description, description bundle) and name and
-derives the namespace and prefix for you.
-
-You do not need to vendor the core vocabularies — `oml`, `dc`, `rdf`, `rdfs`, `xsd`, `owl`,
-`codegen`, and `diagram` ship with the language server and import with no dependency
-declaration.
-
-### Part A — Initial vocabulary
+### Part A — The vocabulary
 
 | # | Requirement | Guidance |
 | --- | --- | --- |
@@ -336,7 +254,7 @@ declaration.
 | 4 | **5–10 relations**, `from` / `to` / `reverse` | Verb phrases that read as sentences |
 | 5 | **Cardinality restrictions where confident** | Constrain what you *know* |
 
-### Part B — Basic system model
+### Part B — The description
 
 | # | Requirement | Guidance |
 | --- | --- | --- |
@@ -358,7 +276,7 @@ about. It becomes overhead. A minimal vocabulary, fit for your questions, is the
 
 **Take inspiration from the running example where it fits.** Make it thoughtful and
 interesting. By the time this is due you will have seen Module 3, so **all OML constructs are
-usable** — this lecture's and the next one's, not just the six above.
+usable** — this lecture's and the next one's, not just this module's six.
 
 ### Submitting
 

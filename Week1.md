@@ -1,12 +1,15 @@
 # Week 1 — Ontological Modeling for Systems Engineering
 
-Set up the toolchain and submit two deliverables before Module 2.
+Set up the toolchain, then start your project. Two things to submit before Module 2 — and
+they are different in kind: **assignments** exercise the shared running example, while
+**project deliverables** build the system *you* choose, one per module, into a model you carry
+all semester.
 
 **Due before Module 2:**
 
 1. [Assignment 1 — Tool Setup](#assignment-1--tool-setup) — install the tools, run the
    example, screenshot everything.
-2. [Deliverable 1 — Project Scope](#deliverable-1--project-scope--problem-statement) — 1–2
+2. [Project Deliverable 1 — Scope & Problem Statement](#project-deliverable-1--project-scope--problem-statement) — 1–2
    pages on the system you propose to model.
 
 > **Start today.** [Step 0](#step-0--send-me-your-github-email) gates every login step, and
@@ -164,7 +167,7 @@ get stuck.
 
 ---
 
-## Deliverable 1 — Project Scope & Problem Statement
+## Project Deliverable 1 — Project Scope & Problem Statement
 
 **1–2 pages. Due before Module 2.** Propose your project: the domain and the system you want
 to model. Five sections:

@@ -126,7 +126,8 @@ No ZIP this time.
 1. Commit your changes to your fork with a descriptive message.
 2. `git push`.
 3. Copy the **commit hash** — GitHub shows it on the commit page.
-4. Email me **the URL of your public fork** and **that commit hash**.
+4. On the **UofA learning platform**, submit a document stating two things: the **URL of your
+   public fork** and the **commit hash**.
 
 I clone your fork, check out your hash, run the three gates, read your OML, and look at your
 work through the viewpoints. Commit hashes are unambiguous, which is the point.
@@ -280,9 +281,10 @@ usable** — this lecture's and the next one's, not just this module's six.
 
 ### Submitting
 
-Same mechanism as Assignment 2: a public repo URL plus a commit hash. Going forward you keep
-two repos — your `sierra-method` fork for assignments, and your project repo — and every
-delivery is a URL and a hash.
+Same mechanism as Assignment 2: push your work, then submit a document on the **UofA learning
+platform** stating your **project repo URL** and the **commit hash**. Going forward you keep two
+repos — your `sierra-method` fork for assignments, and your project repo — and every delivery is
+a document naming a URL and a hash.
 
 ---
 

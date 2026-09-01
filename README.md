@@ -8,6 +8,7 @@ repo before every module.
 | Week | Module | Instructions |
 | --- | --- | --- |
 | 1 | Introduction to Ontological Modeling for Systems Engineering | [Week1.md](Week1.md) |
+| 2 | Representation I: The Basics of OML | [Week2.md](Week2.md) |
 
 ## Key Links
 
@@ -19,6 +20,8 @@ repo before every module.
 | OML overview paper (ISWC 2026) | https://www.modelware.io/assets/papers/iswc-2026-oml-semantic-web-mbse.pdf |
 | openCAESAR (open source project) | https://opencaesar.io/ |
 | Running example: `sierra-method` | https://github.com/modelware/sierra-method |
+| Ontology Development 101 (Stanford) | https://protege.stanford.edu/publications/ontology_development/ontology101.pdf |
+| OWL 2 Primer (W3C) | https://www.w3.org/TR/owl2-primer/ |
 | Visual Studio Code | https://code.visualstudio.com/download |
 | Node.js | https://nodejs.org/ |
 | Gemini for Students | https://gemini.google/students/ |

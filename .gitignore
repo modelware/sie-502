@@ -1,0 +1,9 @@
+# Instructor-only content. Only README.md and instructions/ are published to students.
+assignments/
+projects/
+grades/
+.claude/
+
+# macOS
+.DS_Store
+**/.DS_Store

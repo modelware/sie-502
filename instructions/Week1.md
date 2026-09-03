@@ -3,7 +3,7 @@
 Set up the toolchain, then start your project. Two things to submit before Module 2 — and
 they are different in kind: **assignments** exercise the shared running example, while
 **project deliverables** build the system *you* choose, one per module, into a model you carry
-all semester.
+across the quarter.
 
 **Due before Module 2:**
 
@@ -23,7 +23,7 @@ all semester.
 - **OML Code** — VS Code extension; the IDE for the OML language.
 - **OML CLI** — command line: lint / validate / reason / render.
 - **An AI coding assistant** — the generative half of the neurosymbolic workflow.
-- **`sierra-method`** — the running example we grow all semester (the Fireforce project:
+- **`sierra-method`** — the running example we grow across the quarter (the Fireforce project:
   a method, a vocabulary, and a system description in OML).
 
 ---
@@ -193,9 +193,11 @@ each one is for.
 Strong questions are specific, cross-cutting, and currently hard to answer. They become your
 model's acceptance criteria.
 
-**Choose a domain you actually know.** You build on this proposal all semester: weekly
-assignments stay on the case study so the concepts land, and the project is where you apply
-them. I will give you feedback before you build on it.
+**Choose a domain you actually know, and scope it tightly.** You build on this proposal for the
+rest of the quarter: weekly assignments stay on the case study so the concepts land, and the
+project is where you apply them. This is a 7.5 week quarter, so a narrow model that answers your
+questions is worth far more than a broad one that only enumerates. I will give you feedback
+before you build on it.
 
 ---
 

@@ -145,7 +145,7 @@ validates*.
 This is the **project** track, not the assignment track: your own system, your own repo, built
 on the scope statement you wrote for Project Deliverable 1. Nothing here touches
 `sierra-method` — you start a new project from scratch and grow it every module for the rest of
-the semester.
+the quarter.
 
 ### Starting the repo
 

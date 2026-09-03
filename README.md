@@ -1,6 +1,6 @@
 # SIE-502: Ontological Modeling for Systems Engineering
 
-Weekly instructions are published here — check this repo before every module. Each module has
+Weekly instructions are published here - check this repo before every module. Each module has
 two tracks: **assignments**, which exercise the shared `sierra-method` running example, and
 **project deliverables**, which build the system you choose into a model you grow all semester.
 

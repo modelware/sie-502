@@ -230,9 +230,9 @@ right-click → New Ontology…**, which derives the namespace and prefix for yo
 | 9 | **Some recursive relation hierarchies** | Like `contains`, `aggregates` |
 | 10 | **Lints clean** | Non-negotiable |
 
-### Two things to hold yourself to
+### Follow your week 1 project plan
 
-**Check against your Module 1 questions.** You wrote 3-5 questions your model should answer.
+**Check against your Module 1 business questions.** You wrote 3-5 questions your model should answer.
 Walk each one through your vocabulary. If a question needs a term you haven't yet
 declared, **you've found your next increment.** Those questions are your acceptance criteria -
 use them while building, not after. Of course, if you changed your questions, you may need to

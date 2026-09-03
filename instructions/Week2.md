@@ -121,20 +121,18 @@ deviated somewhere - that is the feedback loop, and it is faster than reading yo
 
 ### How to submit
 
-No ZIP this time.
-
 1. Commit your changes to your fork with a descriptive message.
 2. `git push`.
 3. Copy the **commit hash** - GitHub shows it on the commit page.
 4. On the **UofA learning platform**, submit a document stating two things: the **URL of your
-   public fork** and the **commit hash**.
+   public fork** and the **commit hash** of your submission.
 
 I clone your fork, check out your hash, run the three gates, read your OML, and look at your
 work through the viewpoints. Commit hashes are unambiguous, which is the point.
 
-**Graded on:** builds clean, conventions followed, and **semantically sensible** - a port
-with no direction or a connection transferring nothing loses points *even though it
-validates*.
+**Graded on:** builds clean, conventions followed, and **semantically sensible** (a port
+with no direction or a connection transferring nothing loses points even though it
+validates).
 
 ---
 
@@ -142,10 +140,9 @@ validates*.
 
 **Due before Module 4** (not this week - you get Module 3 first).
 
-This is the **project** track, not the assignment track: your own system, your own repo, built
-on the scope statement you wrote for Project Deliverable 1. Nothing here touches
-`sierra-method` - you start a new project from scratch and grow it every module for the rest of
-the quarter.
+This is the **project** track: your own system, your own repo, built
+on the scope statement you wrote for Project Deliverable 1. You start a new reop/project 
+from scratch and grow it every module for the rest of the quarter.
 
 ### Starting the repo
 
@@ -159,48 +156,17 @@ defaults. Press Enter through all five prompts except **Base IRI**, which you se
 `http://www.example.com/method`. (Accepting `both` for the last one gives you a vocabulary *and*
 a description.)
 
-The base IRI is a prefix - init appends `/vocabulary` and `/description` - so you get
-`http://www.example.com/method/vocabulary#`. An IRI *names* an ontology, it is not an address:
-nothing is fetched, the domain need not exist, everything runs locally. Rename it later if you
-like, keeping the folders in step.
+The base IRI is a prefix. The tool appends `/vocabulary` and `/description`, so you get
+`http://www.example.com/method/vocabulary#`. An IRI *names* an ontology. Rename it later 
+if you like, but synchronize the folder paths in lock step.
 
-### Open it in VS Code: before any other command
+### Finish the scaffolding: separate the method from the model
 
-**File → Open Folder…** on `my-project`, the folder holding `.oml/`. The OML Code extension
-starts the server for you: no `oml start`, no port, no login. Do this first - every `oml`
-command needs that server, and without it `oml lint` just answers `start server first`.
+The `oml init` puts both files in one tree. Split them the way Sierra does:
+- vocabulary (your *method*) under `src/method` 
+- description (your *model*) under `src/model` 
 
-Run the CLI from the window's **integrated terminal** (Terminal → New Terminal); a shell
-started elsewhere will not find the server.
-
-### Separate the method from the model
-
-Init put both files in one tree. Split them the way Sierra does - vocabulary (your *method*)
-under `src/method`, description (your *model*) under `src/model`.
-
-**1. Give the description its own IRI.** Open `src/oml/example.com/my-project/description.oml`
-and change the namespace on line 3 - `method` becomes `project`:
-
-```diff
--description <http://www.example.com/method/description#> as myproject-desc {
-+description <http://www.example.com/project/description#> as myproject-desc {
-```
-
-Leave the rest of the file alone, including the `uses` line pointing at the vocabulary.
-
-**2. Move the files.**
-
-```bash
-mkdir -p src/method/oml/www.example.com/method
-mkdir -p src/model/oml/www.example.com/project
-
-mv src/oml/example.com/my-project/vocabulary.oml  src/method/oml/www.example.com/method/
-mv src/oml/example.com/my-project/description.oml src/model/oml/www.example.com/project/
-rm -rf src/oml
-```
-
-**3. Check it.** Your project should now look exactly like this - seven files, and no `src/oml`
-left over:
+Make it look like this by moving the files in file explorer.
 
 ```
 my-project/
@@ -224,21 +190,22 @@ my-project/
                     └── description.oml
 ```
 
-The two `.oml` files are the ones you work in; the rest is project configuration you can leave
-alone. Their namespaces:
+Then open description.oml using a text editor and change its header to:
 
-| File | Namespace |
-| --- | --- |
-| `…/method/oml/www.example.com/method/vocabulary.oml` | `http://www.example.com/method/vocabulary#` |
-| `…/model/oml/www.example.com/project/description.oml` | `http://www.example.com/project/description#` |
+```
+description <http://www.example.com/project/description#> as myproject-desc {
+```
 
-Each path after its `oml/` folder reads back as the IRI. **That is the whole rule**: a namespace
-is derived from the segments after the deepest `oml` folder - which is why `method/` and `model/`
-*in front* of the anchor change nothing. If the two ever disagree the ontology cannot be found,
-and the error surfaces in the file that *imports* it, so check folder names first.
+Leave the rest of the file alone, including the `uses` line pointing at the vocabulary.
 
-Then `oml lint`, which should report `11 OML file(s) checked` - your two, plus nine core
-vocabularies that live inside the language server rather than in your project.
+### Now open it in VS Code: before any `oml` command
+
+With the scaffolding finished, **File → Open Folder…** on `my-project`.
+
+Run the CLI from the window's **integrated terminal** (Terminal → New Terminal); a shell
+started elsewhere will not find the server.
+
+Then `oml lint`, which should report `11 OML file(s) checked`.
 
 That is your **first working base**: it loads, lints, and reasons. Part A fills in
 `vocabulary.oml` and Part B fills in `description.oml`, replacing the placeholder `Component` /
@@ -268,16 +235,19 @@ right-click → New Ontology…**, which derives the namespace and prefix for yo
 ### Two things to hold yourself to
 
 **Check against your Module 1 questions.** You wrote 3-5 questions your model should answer.
-Walk each one through your vocabulary. If a question needs a relationship you haven't
-declared, **you've found your next concept.** Those questions are your acceptance criteria -
-use them while building, not after.
+Walk each one through your vocabulary. If a question needs a term you haven't yet
+declared, **you've found your next increment.** Those questions are your acceptance criteria -
+use them while building, not after. Of course, if you changed your questions, you may need to
+change your vocabulary to accomodate.
 
-The inverse also applies: don't add vocabulary you have no intention of asking questions
+The inverse also applies: don't add tersm you have no intention of asking questions
 about. It becomes overhead. A minimal vocabulary, fit for your questions, is the goal.
+
+You may split your vcabulary into several if you like after, but get it working first using one. 
 
 **Take inspiration from the running example where it fits.** Make it thoughtful and
 interesting. By the time this is due you will have seen Module 3, so **all OML constructs are
-usable** - this lecture's and the next one's, not just this module's six.
+usable** - this lecture's and the next one's.
 
 ### Submitting
 
@@ -298,9 +268,3 @@ Not required, but this is the week the reading actually pays off.
 | REF07 | [OWL 2 Primer: W3C](https://www.w3.org/TR/owl2-primer/) | Concentrate on classes, individuals, properties, hierarchies, domains/ranges, and simple restrictions rather than reading the whole spec. It deliberately progresses from simple representation toward more expressive constructs |
 | REF08 | [Ontology-based systems engineering: a state-of-the-art review](https://doi.org/10.1016/j.compind.2019.05.003) | Answers *why would a systems engineer care about any of this?* Surveys how ontologies have been applied across SE knowledge areas and emphasizes explicit, shareable, reusable semantics |
 | REF09 | [The Case for Integrated Model Centric Engineering (openCAESAR)](https://opencaesar.io/) | Argues that conventional MBSE is limited by informal semantics, fragmented tools, weak interoperability, and inadequate configuration/provenance management |
-
----
-
-**Next: Module 3 - Representation II: Advanced Features of OML.** Reification and n-ary
-relations, advanced restrictions, property characteristics, quantities, identity,
-architecture, and SE patterns.

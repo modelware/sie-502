@@ -1,26 +1,26 @@
 # Week 2: Representation I: The Basics of OML
 
-You have a working environment. Now you write OML.
+You have a working environment from last week. This week, you write OML!
 
 **Due before Module 3:**
 
-1. [Assignment 2: Extend Fire Force VI](#assignment-2-extend-fire-force-vi) - extend the
-   shared Mission Control example using only this module's constructs.
+1. [Assignment 2: Extend Fire Force VI](#assignment-2-extend-fire-force-vi)
+
+Extend the shared Mission Control example using only this module's constructs.
 
 **Due before Module 4:**
 
-2. [Project Deliverable 2: Initial Vocabulary and Description](#project-deliverable-2-initial-vocabulary-and-description) -
-   the first OML for **your own project**: an initial vocabulary and a description.
+2. [Project Deliverable 2: Initial Vocabulary and Description](#project-deliverable-2-initial-vocabulary-and-description)
 
-> **New this week: you submit a commit, not a ZIP.** [Step 1](#step-1-fork-dont-just-clone)
-> changes how you work with the repo - fork it, so you can commit. Do that before you write
-> any OML.
+Develop the first OML for **your own project**: an initial vocabulary and a description.
 
 ---
 
 ## 1. Seeing What the Reasoner Sees
 
-You write assertions. The reasoner adds **entailments**. To look at them:
+Recall from week 2 lecture: you write assertions, the reasoner adds **entailments**. 
+
+To look at them:
 
 ```bash
 # open the project folder in VS Code first: the extension starts the server for you
@@ -39,21 +39,20 @@ Do this once by hand. It is the fastest way to internalize what your statements 
 
 ## 2. Setup for This Week
 
-### Step 1: Fork, don't just clone
+### Step 1: Fork Sierra Method Repo
 
-Last week you cloned `sierra-method`. You cannot commit to my repo. This week you need to,
-so make your own copy:
+Last week you cloned `sierra-method`. This week you need to make your own copy:
 
 1. Go to https://github.com/modelware/sierra-method
-2. Click **Fork** (top right) → choose your account as the destination
+2. Click **Fork** (top right) → choose your Github account as the destination
 3. Clone **your fork**:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/sierra-method.git
 ```
 
-4. **File → Open Folder…** in VS Code and select it.
-5. Confirm the fork is **public** (Settings → General → Danger Zone) so I can read it.
+4. Confirm the fork is **public** (Settings → General → Danger Zone) so I can read it.
+5. **File → Open Folder…** in VS Code and select it.
 
 ### Step 2: Read before you write
 
@@ -70,13 +69,12 @@ Navigate with the editor, not by scrolling. `Cmd`/`Ctrl` + hover shows a definit
 ontology → **Open Diagram** to see a vocabulary graphically, or **Show Diagram** on a
 description. Diagrams are live - edit a value and the diagram updates.
 
-Read at least these five files before starting:
+You can also start from the methodology views (markdown files) by clicking on the README.md
+and following the hyperlinks. When you arrive at a view (table, tree, graph, diagram, etc),
+you can right click and choose Navigate to code from the context menu. This will show you
+how the patterns in the view are authored in the OML Code.
 
-- `base.oml` - the aspects and scalar properties everything reuses
-- `component.oml` - `Component`, `PhysicalPart`, `Port`, `direction`, `Connection`, `transfers`
-- `stakeholder.oml` - `Stakeholder`, `Concern`, `Requirement`, `expresses`, `states`
-- `system-analysis/connections.oml` - **the pattern your ports and connections must follow**
-- `system-analysis/masses.oml` - how `ref instance` adds mass without touching `components.oml`
+The point is to feel comfortable understanding the patterns used in the running example.
 
 ---
 

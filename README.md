@@ -10,6 +10,7 @@ two tracks: **assignments**, which exercise the shared `sierra-method` running e
 | --- | --- | --- |
 | 1 | Introduction to Ontological Modeling for Systems Engineering | [Week1.md](instructions/Week1.md) |
 | 2 | Representation I: The Basics of OML | [Week2.md](instructions/Week2.md) |
+| 3 | Representation II: Reasoning over OML | [Week3.md](instructions/Week3.md) |
 
 ## Key Links
 

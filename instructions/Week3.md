@@ -15,19 +15,41 @@ inconsistencies, explanations, and rules.
 
 ## 1. Setup
 
-Work in **your fork** of `sierra-method` from last week. Start clean:
+Do both steps before you start. The experiments below assume the latest example *and* the
+latest tools.
+
+### Step 1: Upgrade OML Code to v0.26.0
+
+You need **v0.26.0 or later** this week.
+
+**The extension.** In VS Code, open **Extensions** (`Cmd/Ctrl+Shift+X`), find **OML Code**, and click **Update** if offered. If you left auto-update on, you may already be there - check
+the version shown on the extension's page. Then **reload the window** when prompted.
+
+**The CLI.** Upgrade and confirm:
 
 ```bash
-git pull            # if you synced your fork with upstream
+npm install -g @oml/cli
+oml -v       # must report 0.26.0 or later
+```
+
+
+### Step 2: Sync your `sierra-method` fork
+
+On **your fork's** GitHub page, click **Sync fork** → **Update branch**. Then pull it locally:
+
+```bash
+git pull
 git status          # should be clean before you start breaking things
 ```
 
-Open the folder in VS Code and run every command from its **integrated terminal**.
+If you have pushed your own Assignment 2 commits on `main`, sync will merge upstream in alongside them; that is fine. If `git pull` reports a conflict, resolve it before going further.
+
+Now **File → Open Folder…** on the repo and run every command from VS Code's **integrated terminal**.
 
 ### The commands you need this week
 
 ```bash
-oml reason                 # fast check only: is the model consistent?
+oml reason                 # is the model consistent? also writes build/owl
 oml reason -e              # explain any inconsistency it finds
 oml reason -u false        # turn OFF the unique names assumption
 ```

@@ -18,18 +18,19 @@ inconsistencies, explanations, and rules.
 Do both steps before you start. The experiments below assume the latest example *and* the
 latest tools.
 
-### Step 1: Upgrade OML Code to v0.26.0
+### Step 1: Update OML Code and the OML CLI to the latest version
 
-You need **v0.26.0 or later** this week.
+Both tools must be on their **latest published version** this week.
 
 **The extension.** In VS Code, open **Extensions** (`Cmd/Ctrl+Shift+X`), find **OML Code**, and click **Update** if offered. If you left auto-update on, you may already be there - check
-the version shown on the extension's page. Then **reload the window** when prompted.
+the version shown on the extension's page against the latest on the Marketplace. Then
+**reload the window** when prompted.
 
-**The CLI.** Upgrade and confirm:
+**The CLI.** Update and confirm:
 
 ```bash
-npm install -g @oml/cli
-oml -v       # must report 0.26.0 or later
+npm install -g @oml/cli@latest
+oml -v       # should match the latest published version
 ```
 
 

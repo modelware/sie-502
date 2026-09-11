@@ -36,7 +36,9 @@ oml -v       # should match the latest published version
 
 ### Step 2: Sync your `sierra-method` fork
 
-On **your fork's** GitHub page, click **Sync fork** → **Update branch**. Then pull it locally:
+1. **IMPORTANT**: On **your fork's** GitHub page: click **Sync fork** → **Update branch**.
+
+2. Then pull it locally:
 
 ```bash
 git pull

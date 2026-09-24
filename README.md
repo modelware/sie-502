@@ -12,6 +12,7 @@ two tracks: **assignments**, which exercise the shared `sierra-method` running e
 | 2 | Representation I: The Basics of OML | [Week2.md](instructions/Week2.md) |
 | 3 | Representation II: Reasoning over OML | [Week3.md](instructions/Week3.md) |
 | 4 | Methodology I: Patterns and Authoring | [Week4.md](instructions/Week4.md) |
+| 5 | Methodology II: Queries, Views, and Analysis | [Week5.md](instructions/Week5.md) |
 
 ## Key Links
 

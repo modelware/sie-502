@@ -3,10 +3,14 @@
 **Due before Module 7:**
 
 1. [Assignment 6: Put an Agent to Work on Fire Force](#assignment-6-put-an-agent-to-work-on-fire-force)
-2. [Project 4 (Week 6): Put an Agent to Work on Your Method](#project-4-week-6-put-an-agent-to-work-on-your-method)
+**Project work begun this week and completed with Week 8:**
 
-> **Project numbering:** This is **Project 4**, it covers **Week 6 only**, and it is submitted
-> this week. It is separate from Project 3, which covered Weeks 4-5.
+2. [Project 4 (Weeks 6-8), Week 6 component: Put an Agent to Work on Your Method](#project-4-weeks-6-8-week-6-component-put-an-agent-to-work-on-your-method)
+
+> **Project numbering:** **Weeks 6, 7, and 8 together form Project 4.** This page describes the
+> Week 6 component. Continue the same project through Weeks 7 and 8 and submit one cumulative
+> **Project 4**, not a separate Week 6 project. It is separate from Project 3, which covered
+> Weeks 4-5.
 
 ---
 
@@ -105,7 +109,7 @@ of the asks (screen capture, answer comparison, observations, and chat logs).
 
 ---
 
-## Project 4 (Week 6): Put an Agent to Work on Your Method
+## Project 4 (Weeks 6-8), Week 6 Component: Put an Agent to Work on Your Method
 
 Run the same experiment three times, adding one capability each time, then improve the
 skill based on what you see.
@@ -137,9 +141,13 @@ skill based on what you see.
 - **Round 4:** point to the specific log lines where the agent drifted from the skill, the
   skill change you made, and whether a rerun behaved better.
 
-### Submitting
+### Saving Your Week 6 Work
 
 Revert the git changes after completing rounds 1, 2, and 3 (after taking screenshots and
-logs). Commit only the result of round 4 (the adjusted skill) in your project repo. Then
-submit a document on the **UofA learning platform** with your **project repo URL**, the
-**commit hash**, and the chat logs, screenshots, and report.
+logs). Commit only the result of round 4 (the adjusted skill) in your project repo, push it,
+and continue from it in Week 7. Preserve the following evidence for the cumulative Project 4
+submission:
+
+- The **project repo URL** and the **commit hash** of the adjusted skill.
+- The chat logs and git-change screenshots from rounds 1, 2, and 3.
+- The round 4 report and its chat log.

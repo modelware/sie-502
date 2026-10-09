@@ -7,9 +7,12 @@ inconsistencies, explanations, and rules.
 
 1. [Assignment 3: Reasoning Experiments](#assignment-3-reasoning-experiments) - eight
    experiments on `sierra-method`, with screenshots and explanations.
-2. [Project Deliverable 2: Initial Vocabulary and Description](Week2.md#project-deliverable-2-initial-vocabulary-and-description) -
+2. [Project 2 (Weeks 2-3): Initial Vocabulary, Description, and Reasoning](Week2.md#project-2-weeks-2-3-week-2-component-initial-vocabulary-and-description) -
    assigned last week, due now. See also
-   [Project Deliverable 2, continued](#project-deliverable-2-continued) below.
+   [Project 2, Week 3 component](#project-2-weeks-2-3-week-3-component-reasoning) below.
+
+> **Project numbering:** This is the final submission for **Project 2**, which combines the
+> work from **Weeks 2 and 3**. Submit the cumulative repository state containing both weeks.
 
 ---
 
@@ -245,10 +248,10 @@ reasoner's output rather than just capturing that it went red.
 
 ---
 
-## Project Deliverable 2, continued
+## Project 2 (Weeks 2-3), Week 3 Component: Reasoning
 
-Project Deliverable 2 was assigned last week and is
-[**due before Module 4**](Week2.md#project-deliverable-2-initial-vocabulary-and-description).
+Project 2 was assigned last week and is
+[**due before Module 4**](Week2.md#project-2-weeks-2-3-week-2-component-initial-vocabulary-and-description).
 Now that you have seen this module, enrich it with what you learned:
 
 | # | Add | Why |

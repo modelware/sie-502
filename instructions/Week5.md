@@ -3,7 +3,11 @@
 **Due before Module 6:**
 
 1. [Assignment 5: Build a Small Analysis Layer Over Fire Force](#assignment-5-build-a-small-analysis-layer-over-fire-force)
-2. [Project Deliverable 5: Add an Analysis Layer to Your Methodology](#project-deliverable-5-add-an-analysis-layer-to-your-methodology)
+2. [Project 3 (Weeks 4-5), Week 5 component: Add an Analysis Layer to Your Methodology](#project-3-weeks-4-5-week-5-component-add-an-analysis-layer-to-your-methodology)
+
+> **Project numbering:** This is the final submission for **Project 3**, which combines the
+> methodology work from **Week 4** with the analysis layer from **Week 5**. Submit the latest
+> cumulative Week 5 commit containing both components; a Week 4-only commit is incomplete.
 
 ---
 
@@ -85,7 +89,7 @@ notebook**, and a **short reflection**.
 
 ---
 
-## Project Deliverable 5: Add an Analysis Layer to Your Methodology
+## Project 3 (Weeks 4-5), Week 5 Component: Add an Analysis Layer to Your Methodology
 
 Every methodology question should end in either an **answer** or a **diagnosed gap**.
 
@@ -113,5 +117,6 @@ Activity."*
 
 ### Submitting
 
-Push your work, then submit a document on the **UofA learning platform** with your **project
-repo URL** and the **commit hash**.
+Push the cumulative Week 4-5 work, then submit **Project 3** on the **UofA learning platform**
+with your **project repo URL** and the **latest commit hash that contains both the Week 4
+methodology and Week 5 analysis work**.

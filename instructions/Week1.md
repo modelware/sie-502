@@ -2,15 +2,19 @@
 
 Set up the toolchain, then start your project. Two things to submit before Module 2 - and
 they are different in kind: **assignments** exercise the shared running example, while
-**project deliverables** build the system *you* choose, one per module, into a model you carry
-across the quarter.
+**projects** build the system *you* choose into a model you carry across the quarter. Some
+project submissions combine work from two weeks; the project number is therefore not always
+the same as the week number.
 
 **Due before Module 2:**
 
 1. [Assignment 1: Tool Setup](#assignment-1-tool-setup) - install the tools, run the
    example, screenshot everything.
-2. [Project Deliverable 1: Scope & Problem Statement](#project-deliverable-1-project-scope-problem-statement) - 1-2
+2. [Project 1 (Week 1): Scope & Problem Statement](#project-1-week-1-project-scope-problem-statement) - 1-2
    pages on the system you propose to model.
+
+> **Project numbering:** This is **Project 1**, it covers **Week 1 only**, and it is submitted
+> this week.
 
 > **Start today.** [Step 0](#step-0-send-me-your-github-email) gates every login step, and
 > AI assistant sign-up ([Step 6](#step-6-get-an-ai-coding-assistant)) can take days to
@@ -167,7 +171,7 @@ get stuck.
 
 ---
 
-## Project Deliverable 1: Project Scope & Problem Statement
+## Project 1 (Week 1): Project Scope & Problem Statement
 
 **1-2 pages. Due before Module 2.** Propose your project: the domain and the system you want
 to model. Five sections:

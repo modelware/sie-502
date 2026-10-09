@@ -3,7 +3,14 @@
 **Due before Module 8:**
 
 1. [Assignment 7: Generate, Publish, and Consume Sierra](#assignment-7-generate-publish-and-consume-sierra)
-2. [Project Deliverable 7: Generate, Publish, and Reuse Your Methodology](#project-deliverable-7-generate-publish-and-reuse-your-methodology)
+
+**Project work begun this week and completed with Week 8:**
+
+2. [Project 5 (Weeks 7-8), Week 7 component: Generate, Publish, and Reuse Your Methodology](#project-5-weeks-7-8-week-7-component-generate-publish-and-reuse-your-methodology)
+
+> **Project numbering:** **Weeks 7 and 8 together form Project 5.** This page describes the
+> Week 7 component. Continue the same project through Week 8 and submit one cumulative
+> **Project 5**, not a separate Week 7 project.
 
 ---
 
@@ -183,7 +190,7 @@ platform** with:
 
 ---
 
-## Project Deliverable 7: Generate, Publish, and Reuse Your Methodology
+## Project 5 (Weeks 7-8), Week 7 Component: Generate, Publish, and Reuse Your Methodology
 
 Do the same three steps on your own method: give it a generator, publish it, and prove it
 works from an independent repository.
@@ -218,10 +225,10 @@ The consumer repository must:
 - **Republishing.** If the consumer exposes a gap in the package, fix the method, raise
   `project.version`, publish again, and install the new version in the consumer.
 
-### Submitting
+### Saving Your Week 7 Work
 
-Commit and push both repositories. Then submit a document on the **UofA learning platform**
-with:
+Commit and push both repositories, and continue from them in Week 8. Preserve the following
+evidence for the cumulative Project 5 submission:
 
 - The **URLs and commit hashes** of your methodology repo and of the new example repo.
 - A description of what you did: the generator and what it produces, what the package

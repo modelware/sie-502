@@ -3,7 +3,10 @@
 **Due before Module 7:**
 
 1. [Assignment 6: Put an Agent to Work on Fire Force](#assignment-6-put-an-agent-to-work-on-fire-force)
-2. [Project Deliverable 6: Put an Agent to Work on Your Method](#project-deliverable-6-put-an-agent-to-work-on-your-method)
+2. [Project 4 (Week 6): Put an Agent to Work on Your Method](#project-4-week-6-put-an-agent-to-work-on-your-method)
+
+> **Project numbering:** This is **Project 4**, it covers **Week 6 only**, and it is submitted
+> this week. It is separate from Project 3, which covered Weeks 4-5.
 
 ---
 
@@ -102,7 +105,7 @@ of the asks (screen capture, answer comparison, observations, and chat logs).
 
 ---
 
-## Project Deliverable 6: Put an Agent to Work on Your Method
+## Project 4 (Week 6): Put an Agent to Work on Your Method
 
 Run the same experiment three times, adding one capability each time, then improve the
 skill based on what you see.

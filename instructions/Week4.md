@@ -3,7 +3,14 @@
 **Due before Module 5:**
 
 1. [Assignment 4: Build One Fire Force Authoring Page End to End](#assignment-4-build-one-fire-force-authoring-page-end-to-end)
-2. [Project Deliverable 4: Turn Your Vocabulary Into a Small Methodology](#project-deliverable-4-turn-your-vocabulary-into-a-small-methodology)
+
+**Project work begun this week and submitted after Week 5:**
+
+2. [Project 3 (Weeks 4-5), Week 4 component: Turn Your Vocabulary Into a Small Methodology](#project-3-weeks-4-5-week-4-component-turn-your-vocabulary-into-a-small-methodology)
+
+> **Project numbering:** **Weeks 4 and 5 together form Project 3.** Week 4 builds the
+> methodology; Week 5 adds its analysis layer. Submit one cumulative **Project 3** after
+> completing Week 5, not a Week 4-only project submission.
 
 ---
 
@@ -55,7 +62,7 @@ platform** with your **fork URL** and the **commit hash**.
 
 ---
 
-## Project Deliverable 4: Turn Your Vocabulary Into a Small Methodology
+## Project 3 (Weeks 4-5), Week 4 Component: Turn Your Vocabulary Into a Small Methodology
 
 Narrative should explain rationale, alternatives, uncertainty, and open issues, not restate
 the model.
@@ -71,7 +78,7 @@ the model.
 | Dogfooding | >= 10 instances through your editors |
 | METHOD.md | What the method prescribes and why |
 
-### Submitting
+### Saving Your Week 4 Work
 
-Push your work, then submit a document on the **UofA learning platform** with your **project
-repo URL** and the **commit hash**.
+Commit and push this work to your project repository. Continue from it in Week 5; the
+cumulative Project 3 submission is due after the Week 5 analysis layer is complete.

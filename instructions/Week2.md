@@ -8,11 +8,15 @@ You have a working environment from last week. This week, you write OML!
 
 Extend the shared Mission Control example using only this module's constructs.
 
-**Due before Module 4:**
+**Project work begun this week and submitted after Week 3:**
 
-2. [Project Deliverable 2: Initial Vocabulary and Description](#project-deliverable-2-initial-vocabulary-and-description)
+2. [Project 2 (Weeks 2-3), Week 2 component: Initial Vocabulary and Description](#project-2-weeks-2-3-week-2-component-initial-vocabulary-and-description)
 
 Develop the first OML for **your own project**: an initial vocabulary and a description.
+
+> **Project numbering:** **Weeks 2 and 3 together form Project 2.** Week 2 begins the
+> vocabulary and description; Week 3 adds the required reasoning work. Submit one cumulative
+> **Project 2** after completing Week 3, not a separate project for each week.
 
 ---
 
@@ -134,12 +138,12 @@ validates).
 
 ---
 
-## Project Deliverable 2: Initial Vocabulary and Description
+## Project 2 (Weeks 2-3), Week 2 Component: Initial Vocabulary and Description
 
 **Due before Module 4** (not this week - you get Module 3 first).
 
 This is the **project** track: your own system, your own repo, built
-on the scope statement you wrote for Project Deliverable 1. You start a new reop/project 
+on the scope statement you wrote for Project 1. You start a new repo/project
 from scratch and grow it every module for the rest of the quarter.
 
 ### Starting the repo

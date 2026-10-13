@@ -1,13 +1,13 @@
 # Week 8: The Capstone Release
 
-**Due Oct 18:**
+**Due at the end of Week 8:**
 
 1. [Project 4 (Weeks 6-8), Week 8 component: The Capstone Release](#project-4-weeks-6-8-week-8-component-the-capstone-release)
 
 There is **no assignment** this week. All of your time goes to the project.
 
-> **Project numbering:** **Weeks 6, 7, and 8 together form Project 4.** This page describes the
-> Week 8 component, which completes the project begun in the
+> **Project numbering:** **Weeks 6, 7, and 8 together form Project 4.** This page completes
+> the project begun in the
 > [Week 6 component](Week6.md#project-4-weeks-6-8-week-6-component-put-an-agent-to-work-on-your-method)
 > and continued in the
 > [Week 7 component](Week7.md#project-4-weeks-6-8-week-7-component-generate-publish-and-reuse-your-methodology).
@@ -17,7 +17,7 @@ There is **no assignment** this week. All of your time goes to the project.
 
 ## Setup
 
-### Step 1: Update OML Code and the OML CLI to the latest version
+### Step 1: Update OML Code and the OML CLI
 
 In VS Code, open **Extensions** (`Cmd/Ctrl+Shift+X`), find **OML Code**, and click **Update**
 if offered. Then **reload the window** when prompted.
@@ -27,66 +27,56 @@ npm install -g @oml/cli@latest
 oml -v
 ```
 
-### Step 2: Sync your `sierra-method` fork
+### Step 2: Sync Sierra and open your project repo
 
-On **your fork's** GitHub page: click **Sync fork** -> **Update branch**. Then open your
-local clone in VS Code (**File -> Open Folder...**), and in the **Source Control** view
-(`Ctrl+Shift+G`) click **...** -> **Pull**.
+1. On **your `sierra-method` fork's** GitHub page, click **Sync fork** -> **Update branch**,
+   then pull it locally. You will copy two files from it.
+2. **File -> Open Folder...** on your **project repo** (the methodology repo from Week 7).
+   Work in it for the rest of the week.
 
-Then **File -> Open Folder...** on your **project repo**. Run every `oml` command from VS
-Code's **integrated terminal** (**Terminal -> New Terminal**) in that repo. The OML Code
-extension has already launched the OML server for the workspace, so the commands use it
-directly: you do not need `oml start` or `oml stop` locally (only the CI and CD workflows
-start their own).
+Run `oml` commands from VS Code's **integrated terminal** (**Terminal -> New Terminal**). The
+OML Code extension already runs the OML server for your repo, so you do not need `oml start`
+or `oml stop` locally.
 
-### Step 3: Know the two workflows Sierra ships
+### Step 3: Know the two workflows
 
-Sierra already has both workflows. Study them before copying them into your project repo:
+Sierra ships both workflows you need. You will copy them into your repo:
 
 | File | Runs on | What it does |
 | --- | --- | --- |
-| `.github/workflows/ci.yml` | Every push to `main` and every pull request into `main` | Signs in, starts the server, then runs three gates: `oml lint`, `oml validate --only`, `oml reason --only` |
-| `.github/workflows/cd.yml` | Every pushed tag matching `v*.*.*` | Signs in, starts the server, runs `oml render`, and deploys `build/web` to GitHub Pages |
+| `.github/workflows/ci.yml` | Every pull request into `main` (and every push to it) | Runs three **gates**: lint, validate, reason |
+| `.github/workflows/cd.yml` | Every pushed tag like `v1.0.0` | Renders your Markdown to a website and deploys it to GitHub Pages |
 
-Both read the `OML_PLATFORM_API_KEY` secret to sign in to OML (`oml whoami` checks it).
-
-The three CI gates catch different problems:
+Each gate catches a different kind of problem:
 
 | Gate | Command | Fails when |
 | --- | --- | --- |
-| Lint | `oml lint` | An OML file has a syntax error or an OML validation error (for example an unresolved reference) |
-| Validate | `oml validate --only` | A table-editor SHACL block in a Markdown file is violated (for example a required field is missing) |
+| Lint | `oml lint` | An OML file has an error (for example an unresolved reference) |
+| Validate | `oml validate --only` | A SHACL shape in a Markdown table editor is violated (for example a required field is empty) |
 | Reason | `oml reason --only` | The model is logically inconsistent (for example an instance typed by two disjoint concepts) |
 
-### Step 4: Know where git lives in VS Code
+`--only` skips the lint that `validate` and `reason` would otherwise repeat first.
 
-Every git step this week can be done from VS Code's UI. The steps below give the clicks
-first, with the terminal commands in a collapsed **Terminal** block if you prefer them.
+### Step 4: Git from VS Code
+
+Every git step this week can be done from VS Code's UI. Each step gives the clicks, with the
+terminal commands in a collapsed **Terminal** block if you prefer them.
 
 | To do this | In VS Code |
 | --- | --- |
-| See your changes | Open the **Source Control** view: the branch icon in the Activity Bar, or `Ctrl+Shift+G` |
-| Stage | Hover over the **Changes** header (all files) or one file, and click **+** |
-| Commit | Type a message in the box at the top of Source Control and click **Commit** |
-| Push or pull | Click **Sync Changes** (or **Publish Branch** for a new branch), or **...** -> **Push** / **Pull** |
-| Create or switch branches | Click the branch name in the **status bar** (bottom left), then pick a branch or **+ Create new branch...** |
-| Create and push a tag | Command Palette (`Cmd/Ctrl+Shift+P`) -> **Git: Create Tag**, then **Git: Push Tags** |
-| Undo your last commit | **...** -> **Commit** -> **Undo Last Commit** (the changes come back as uncommitted) |
-| Find a commit hash | The **Graph** section at the bottom of Source Control: hover over a commit |
-| Read a push error | When VS Code reports a git error, click **Show Command Output** |
+| See your changes | **Source Control** view: the branch icon in the Activity Bar, or `Ctrl+Shift+G` |
+| Stage and commit | Click **+** next to a file (or the **Changes** header), type a message, click **Commit** |
+| Push or pull | **Sync Changes** (or **Publish Branch** for a new branch), or **...** -> **Push** / **Pull** |
+| Switch or create a branch | Click the branch name in the **status bar** (bottom left) |
+| Find a commit hash | The **Graph** section of Source Control: hover over a commit |
+| Read a git error | Click **Show Command Output** when VS Code reports one |
 
 ---
 
 ## Project 4 (Weeks 6-8), Week 8 Component: The Capstone Release
 
 Publish and defend a reproducible, verified, and approved version **1.0.0** of your
-engineering model. Work in your **project repo** (the methodology repo from Week 7).
-
-> **Worked example:** Sierra went through every step below. See its protected `main`, the
-> pull request [#3](https://github.com/modelware/sierra-method/pull/3) with one commit per
-> gate, the [v1.0.0 release](https://github.com/modelware/sierra-method/releases/tag/v1.0.0),
-> its [live site](https://www.modelware.io/sierra-method/), and the two badges at the top
-> of its [README](https://github.com/modelware/sierra-method#readme).
+engineering model.
 
 | # | Deliverable | Minimum evidence |
 | --- | --- | --- |
@@ -100,36 +90,50 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 | 8 | GitHub Pages | Update your repo's `README.md` to link to your GitHub Pages site and show a release badge. |
 | 9 | Final report | Each Module 1 question answered with evidence tied to release `1.0.0` and its commit, or an explicitly documented gap. Plus your reflection. |
 
-### Deliverable 1: Repository secrets setup
+The work falls into four parts. Parts A-C are mostly clicking through GitHub and take one
+sitting; most of your thinking goes into Part D.
 
-1. Open your project repo on GitHub and click the **Settings** tab (top right of the repo
-   menu; you need to be the repo owner to see it).
-2. In the left sidebar, under **Security**, expand **Secrets and variables** and click
-   **Actions**.
-3. On the **Secrets** tab, click **New repository secret**.
-4. In **Name**, type exactly `OML_PLATFORM_API_KEY`.
-5. In **Secret**, paste the value you were given. Do not add spaces or a trailing newline.
-6. Click **Add secret**. It now appears under **Repository secrets** (its value is hidden
-   from then on).
+| Part | Deliverables | What you end up with |
+| --- | --- | --- |
+| [A. Automate](#part-a-automate-deliverables-1-3) | 1-3 | GitHub checks every change and can publish your site |
+| [B. Protect](#part-b-protect-main-deliverable-4) | 4 | `main` accepts changes only through a pull request that passes the gates |
+| [C. Release](#part-c-release-100-deliverables-5-7) | 5-7 | A reviewed, gated v1.0.0 release with a live site |
+| [D. Show and defend](#part-d-show-and-defend-deliverables-8-9) | 8-9 | README badges, and a final report traced to v1.0.0 |
 
-#### Tips
+> **Worked example:** Sierra has done every step. See its
+> [pull request #3](https://github.com/modelware/sierra-method/pull/3) (one commit per gate),
+> its [v1.0.0 release](https://github.com/modelware/sierra-method/releases/tag/v1.0.0), its
+> [live site](https://www.modelware.io/sierra-method/), and the badges at the top of its
+> [README](https://github.com/modelware/sierra-method#readme).
 
-- **Never commit the key.** It belongs only in the secret, not in a file, a workflow, or a
-  screenshot.
-- If `oml whoami` fails in a workflow log, the secret is missing, misnamed, or mistyped.
-  Open it again (pencil icon), click **Update secret**, and paste the value again.
+**Take screenshots as you go.** Steps that need one are marked **Screenshot**. The full list
+is in [Submitting Project 4](#submitting-project-4).
 
-### Deliverable 2: Continuous integration (CI)
+---
 
-1. In your project repo, copy the workflow from your `sierra-method` clone (adjust the path
-   if Sierra is not next to your repo):
+### Part A: Automate (Deliverables 1-3)
+
+#### Deliverable 1: Add the secret
+
+1. On your repo's GitHub page, click **Settings** -> **Secrets and variables** -> **Actions**
+   (left sidebar, under **Security**).
+2. Click **New repository secret**.
+3. **Name**: `OML_PLATFORM_API_KEY`. **Secret**: paste the value you were given. Click
+   **Add secret**.
+
+**Screenshot** the secret in the list (its value is hidden; never show the value itself).
+
+#### Deliverable 2: Add CI
+
+1. Copy the workflow from your Sierra clone (adjust the path if Sierra is not next to your
+   repo):
 
    ```bash
    mkdir -p .github/workflows
    cp ../sierra-method/.github/workflows/ci.yml .github/workflows/
    ```
 
-2. Run all three gates locally, so CI confirms what you already know:
+2. Run the three gates locally. All three should pass before you continue:
 
    ```bash
    oml lint
@@ -137,12 +141,8 @@ engineering model. Work in your **project repo** (the methodology repo from Week
    oml reason --only
    ```
 
-   `oml validate` and `oml reason` each run lint first by default. `--only` skips that
-   repeat, since you just ran `oml lint`.
-
-3. Commit and push to `main` (it is not protected yet). In **Source Control**, stage
-   `.github/workflows/ci.yml` (**+**), type the message *Add CI workflow*, click **Commit**,
-   then **Sync Changes**.
+3. In **Source Control**, stage `ci.yml`, commit it as *Add CI workflow*, and click **Sync
+   Changes**. (`main` is not protected yet, so this push goes straight in.)
 
    <details><summary>Terminal</summary>
 
@@ -154,41 +154,26 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
    </details>
 
-4. On GitHub, click the **Actions** tab. Click the **CI** run that just started, then the
-   **build** job, and expand each step to watch it. Wait for a green check.
+4. On GitHub, open the **Actions** tab and click the **CI** run. Wait for the green check.
 
-#### Tips
+#### Deliverable 3: Add CD
 
-- Keep **lint, validate, and reason as separate steps** so a failure points at one gate.
-- Leave the job name `build` unchanged, or note the new name: Deliverable 4 refers to it.
-- A red run on `main` at this point means your model already fails a gate. Fix it before
-  continuing.
-
-### Deliverable 3: Continuous delivery (CD)
-
-1. Copy the CD workflow the same way:
+1. Copy the second workflow:
 
    ```bash
    cp ../sierra-method/.github/workflows/cd.yml .github/workflows/
    ```
 
-2. Open `.oml/settings.yml` and find the `render:` line under `defaults`. Sierra's is:
+2. In `.oml/settings.yml`, point the `render:` line under `defaults` at your own model.
+   Sierra's line is:
 
    ```yaml
    render: -m src/model/md -b build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
    ```
 
-   Change `-m` to your Markdown folder and `-c` to your own bundle. Keep `-b build/web`
-   (the folder `cd.yml` uploads).
-3. Render locally from the integrated terminal and check the site:
-
-   ```bash
-   oml render
-   ```
-
-   Open `build/web/index.html` in a browser and click through a few pages.
-4. Commit and push to `main`. In **Source Control**, stage `.github/workflows/cd.yml` and
-   `.oml/settings.yml`, type *Add CD workflow*, click **Commit**, then **Sync Changes**.
+   Change `-m` to your Markdown folder and `-c` to your bundle. Keep `-b build/web`.
+3. Check the site locally: run `oml render`, then open `build/web/index.html` in a browser.
+4. Stage `cd.yml` and `.oml/settings.yml`, commit as *Add CD workflow*, and **Sync Changes**.
 
    <details><summary>Terminal</summary>
 
@@ -200,51 +185,36 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
    </details>
 
-5. On GitHub, enable Pages: **Settings** -> **Pages** (left sidebar, under **Code and
-   automation**) -> **Build and deployment** -> **Source**: choose **GitHub Actions** from the
-   dropdown.
-6. Allow tags to deploy. Selecting GitHub Actions creates a `github-pages` environment that,
-   by default, accepts deployments only from `main`, but CD runs from a tag. Go to
-   **Settings** -> **Environments** -> **github-pages** -> **Deployment branches and tags** ->
-   **Add deployment branch or tag rule**, set **Ref type** to **Tag**, enter `v*.*.*` as the
-   pattern, and click **Add rule**.
+5. Turn on Pages: **Settings** -> **Pages** -> **Source**: **GitHub Actions**.
+6. Let tags deploy: **Settings** -> **Environments** -> **github-pages** -> **Add deployment
+   branch or tag rule** -> **Ref type**: **Tag**, pattern `v*.*.*` -> **Add rule**.
 
-#### Tips
+CD does not run yet. It runs when you push the `v1.0.0` tag in Part C.
 
-- CD runs only on a pushed `v*.*.*` tag, so it will not run until Deliverable 7.
-- If you skip step 6, the CD deploy job fails with *"Tag v1.0.0 is not allowed to deploy to
-  github-pages due to environment protection rules."*
-- Your repo must be **public** for Pages to work on a free account.
+> **Why step 6?** Pages only accepts deployments from `main` by default, but CD runs from a
+> tag. Without the rule, the deploy fails with *"Tag v1.0.0 is not allowed to deploy to
+> github-pages due to environment protection rules."* Your repo must also be **public**.
 
-### Deliverable 4: Protected baseline
+---
 
-1. On GitHub, go to **Settings** -> **Rules** -> **Rulesets** (left sidebar, under **Code
-   and automation**).
-2. Click **New ruleset** -> **New branch ruleset**.
-3. Fill in the top of the form:
-   - **Ruleset Name**: `protect-main`
-   - **Enforcement status**: **Active**
-   - **Bypass list**: leave it **empty**, so the rule applies to you too.
-4. Under **Target branches**, click **Add target** -> **Include default branch** (this is
-   `main`).
-5. Under **Rules**, set:
+### Part B: Protect `main` (Deliverable 4)
 
-   | Rule | Value |
-   | --- | --- |
-   | Restrict deletions | Checked |
-   | Block force pushes | Checked |
-   | Require a pull request before merging | Checked, with **Required approvals** set to **0** (you review your own pull request; see below) |
-   | Require status checks to pass | Checked. Click **Add checks**, type `build`, and select the check from GitHub Actions |
+#### Deliverable 4: Add a branch rule
 
-6. Click **Create** at the bottom of the page.
-7. Confirm the rule works by trying to push directly to `main`:
-   1. Make a throwaway edit (for example add a blank line at the end of `README.md`).
-   2. In **Source Control**, stage it, type *Test branch protection*, click **Commit**, then
-      **Sync Changes**.
-   3. VS Code reports that the push failed. Click **Show Command Output** to see GitHub's
-      rejection (*"push declined due to repository rule violations"*). Take a screenshot.
-   4. Drop the test commit: **...** -> **Commit** -> **Undo Last Commit**. Then right-click
-      `README.md` under **Changes** -> **Discard Changes**.
+1. On GitHub, click **Settings** -> **Rules** -> **Rulesets** -> **New ruleset** -> **New
+   branch ruleset**.
+2. **Ruleset Name**: `protect-main`. **Enforcement status**: **Active**. Leave the **Bypass
+   list** empty, so the rule applies to you too.
+3. **Target branches**: **Add target** -> **Include default branch**.
+4. Under **Rules**, check:
+   - **Restrict deletions** and **Block force pushes**
+   - **Require a pull request before merging**, with **Required approvals** set to **0**
+   - **Require status checks to pass**: click **Add checks**, type `build`, and select it
+5. Click **Create**. **Screenshot** the rule.
+6. Test it: make a throwaway edit (for example a blank line in `README.md`), commit it, and
+   click **Sync Changes**. The push is rejected. Click **Show Command Output** and
+   **screenshot** the rejection. Then undo it: **...** -> **Commit** -> **Undo Last Commit**,
+   and right-click the file -> **Discard Changes**.
 
    <details><summary>Terminal</summary>
 
@@ -256,30 +226,24 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
    </details>
 
-#### Tips
+> **Why 0 approvals?** You review your own pull requests. GitHub does not let authors
+> approve their own, so you leave a review **comment** instead, and the `build` check still
+> blocks any merge that fails a gate. This self-review is a workaround for a GitHub
+> limitation, used in these instructions only. On a real team, a peer reviews the pull
+> request, and required approvals is at least 1.
 
-- **You are the reviewer.** Review your own pull request; no other student is involved.
-  GitHub does not let an author **Approve** their own pull request, so set required approvals
-  to 0 and record your review as a **Comment** instead (steps in Deliverable 6). The required
-  CI check still blocks the merge until every gate passes.
+If `build` does not appear under **Add checks**, CI has not run yet: finish Deliverable 2
+first.
 
-  > **Note:** Self-review is a workaround for a GitHub limitation, used in these instructions
-  > only. On a real team, a peer reviews the pull request, and required approvals is set to at
-  > least 1 so that no one merges their own unreviewed change.
-- The `build` check shows up under **Add checks** only after CI has run at least once, which
-  is why Deliverable 2 comes first.
-- If you see **Settings -> Branches** with **Add classic branch protection rule** instead,
-  that works too: use branch name pattern `main` and the same settings, and check **Do not
-  allow bypassing the above settings**.
+---
 
-### Deliverable 5: Feature branch
+### Part C: Release 1.0.0 (Deliverables 5-7)
 
-1. Start from an up-to-date `main`: click the branch name in the status bar (bottom left)
-   and pick `main`, then in **Source Control** click **...** -> **Pull**.
-2. Create the branch: click the branch name again -> **+ Create new branch...**, type
-   `release-1.0.0`, and press Enter. The status bar now shows `release-1.0.0`.
-3. Push it to GitHub, so it exists there before your first commit: click **Publish Branch**
-   in **Source Control** (or the cloud icon next to the branch name in the status bar).
+#### Deliverable 5: Create a feature branch
+
+1. Click the branch name in the status bar, pick `main`, then **...** -> **Pull**.
+2. Click the branch name again -> **+ Create new branch...** -> `release-1.0.0`.
+3. Click **Publish Branch** in Source Control.
 
    <details><summary>Terminal</summary>
 
@@ -292,206 +256,152 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
    </details>
 
-### Deliverable 6: Commit pushing
+#### Deliverable 6: Push four commits through the gates
 
-Push four commits to the feature branch, one at a time, **waiting for CI to finish after
-each one**:
+You will push four commits, one at a time. The first three each break exactly one gate; the
+fourth fixes everything:
 
-| Commit | Change | Expected CI result |
+| Commit | Change | CI result |
 | --- | --- | --- |
-| 1 | Introduce an OML error (for example a reference to a member that does not exist) | Fails at **Linting** |
-| 2 | Fix commit 1, and violate a SHACL shape in a Markdown table editor (for example leave a required field empty) | Passes Linting, fails at **Validating** |
-| 3 | Fix commit 2, and make the model inconsistent (for example type an instance by two disjoint concepts) | Passes Linting and Validating, fails at **Reasoning** |
-| 4 | Fix commit 3, and set `project.version` to `1.0.0` in `.oml/settings.yml` | **All gates pass** |
+| 1 | Add an OML error (for example a reference to something that does not exist) | Fails at **Linting** |
+| 2 | Undo commit 1's change, and violate a shape (for example leave a required field empty) | Fails at **Validating** |
+| 3 | Undo commit 2's change, and make the model inconsistent (for example type an instance by two disjoint concepts) | Fails at **Reasoning** |
+| 4 | Undo commit 3's change, and set `project.version` to `1.0.0` in `.oml/settings.yml` | **Passes** all gates |
 
-1. Make the commit 1 change and run the gates locally to confirm it fails where you
-   intend. Then in **Source Control**, stage the change, type *Break lint*, click
-   **Commit**, then **Sync Changes**. Record the commit hash from the **Graph** section
-   (hover over the commit).
+1. **Commit 1.** Make the change, and run the gates locally to check it fails where you
+   expect. Commit it (*Break lint*) and **Sync Changes**.
 
    <details><summary>Terminal</summary>
 
    ```bash
    git commit -am "Break lint"
    git push
-   git rev-parse --short HEAD    # record this hash
    ```
 
    </details>
 
-2. Open a pull request. On the repo's GitHub page, click **Compare & pull request** in the
-   yellow banner (or **Pull requests** -> **New pull request**). Set **base** to `main` and
-   **compare** to `release-1.0.0`, give it a title such as *Release 1.0.0*, and click
-   **Create pull request**.
-3. Watch CI. At the bottom of the pull request's **Conversation** tab, the checks box shows
-   the **CI / build** run. Click **Details** to open the log and confirm which step failed.
-   Take a screenshot.
-4. Repeat steps 1 and 3 for commits 2 and 3 (commit messages such as *Break validate* and
-   *Break reason*). Every push to the branch reruns CI on the same pull request.
-5. Push commit 4 (for example *Fix all gates for 1.0.0*) and wait for **All checks have
-   passed**. The **Merge pull request** button turns green only now.
-6. Review the pull request yourself:
-   1. Click the **Files changed** tab and read the full diff.
-   2. Click **Review changes** (or **Submit review**, top right).
-   3. Write what you checked (for example: the diff has only the intended changes, and all
-      three gates pass on the last commit).
-   4. Select **Comment** (Approve is disabled for the author) and click **Submit review**.
-7. Back on the **Conversation** tab, click **Merge pull request** -> **Confirm merge**.
-   Choose **Create a merge commit** if offered a choice.
+2. **Open the pull request.** On GitHub, click **Compare & pull request** in the yellow
+   banner. Check that **base** is `main` and **compare** is `release-1.0.0`, title it
+   *Release 1.0.0*, and click **Create pull request**.
+3. **Watch CI.** At the bottom of the pull request, click **Details** next to the **build**
+   check and confirm which step failed. **Screenshot** it.
+4. **Commits 2, 3, and 4.** For each one: make the change, commit, **Sync Changes**, wait for
+   CI, and **screenshot** the result. They all land on the same pull request.
+5. **Review it yourself.** Open the **Files changed** tab and read the diff. Click **Review
+   changes**, write what you checked, select **Comment**, and click **Submit review**.
+6. **Merge.** On the **Conversation** tab, click **Merge pull request** -> **Confirm merge**
+   (use **Create a merge commit** if asked). **Screenshot** the merged pull request.
 
-#### Tips
+Record the four commit hashes: the pull request's **Commits** tab lists them, each with a
+red or green CI mark.
 
-- **One gate per commit.** Each failing commit must pass every gate before the one it trips,
-  so the log shows exactly which gate caught it.
-- The **Commits** tab of the pull request lists all four commits with their hashes and a
-  red or green mark for each CI run. Screenshot it as a summary.
+#### Deliverable 7: Tag and release v1.0.0
 
-### Deliverable 7: v1.0.0 release
-
-1. Tag the **good commit as it landed on `main`** (the merge commit, which contains commit
-   4) and push the tag:
-   1. Switch to `main` (status bar branch name -> `main`) and **...** -> **Pull**.
-   2. In the **Graph** section, confirm the top commit is your merge commit
-      (*Merge pull request #...*) and record its hash.
-   3. Command Palette (`Cmd/Ctrl+Shift+P`) -> **Git: Create Tag**. Type `v1.0.0` and press
-      Enter, then type the message *Release 1.0.0* and press Enter.
-   4. Command Palette -> **Git: Push Tags**. The tag now appears on GitHub under **Tags**.
+1. **Tag the merge commit.** Switch to `main` and **Pull**. Check that the top commit in
+   **Graph** is *Merge pull request #...*, and record its hash. Then open the Command Palette
+   (`Cmd/Ctrl+Shift+P`) -> **Git: Create Tag** -> `v1.0.0` -> message *Release 1.0.0*.
+   Then Command Palette -> **Git: Push Tags**.
 
    <details><summary>Terminal</summary>
 
    ```bash
    git switch main
    git pull
-   git log --oneline -1          # confirm this is your merge commit; record its hash
+   git log --oneline -1          # the merge commit; record its hash
    git tag -a v1.0.0 -m "Release 1.0.0"
    git push origin v1.0.0
    ```
 
    </details>
 
-2. On the repo's GitHub page, click **Releases** in the right sidebar (or go to
-   `https://github.com/<owner>/<repo>/releases`), then **Draft a new release**.
-3. Click **Choose a tag** and select `v1.0.0`.
-4. Set **Release title** to `v1.0.0`. Click **Generate release notes**, then add a sentence
-   on what the release contains.
-5. Make sure **Set as the latest release** is checked and click **Publish release**.
-6. Click the **Actions** tab and open the **CD** run started by the tag. Wait for both the
-   **build** and **deploy** jobs to pass. The deploy job shows the site URL
-   (`https://<owner>.github.io/<repo>/`).
-7. Open the URL and check the rendered site. **Settings** -> **Pages** also shows *"Your
-   site is live at ..."*.
+2. **Create the release.** On GitHub, click **Releases** (right sidebar) -> **Draft a new
+   release** -> **Choose a tag**: `v1.0.0`. Title it `v1.0.0`, click **Generate release
+   notes**, and click **Publish release**.
+3. **Watch it deploy.** Open the **Actions** tab and the **CD** run the tag started. When
+   both jobs are green, open the site URL it shows (`https://<owner>.github.io/<repo>/`).
+   **Screenshot** the run and the site.
 
-#### Tips
+> **If CD fails,** fix it through another pull request, then move the tag to the new merge
+> commit (`git tag -d v1.0.0`, `git push origin :refs/tags/v1.0.0`, then tag again). Mention
+> it in your report.
 
-- **Tags are not covered by your branch rule.** Tag only after the merge, so the release is
-  exactly the reviewed, gated baseline.
-- If CD fails, fix it through another pull request, then move the tag to the new commit
-  (`git tag -d v1.0.0`, `git push origin :refs/tags/v1.0.0`, tag again) and say so in the
-  report.
+---
 
-### Deliverable 8: GitHub Pages
+### Part D: Show and defend (Deliverables 8-9)
 
-Since `main` is protected, the README change also goes through a pull request.
+#### Deliverable 8: Add README badges
 
-1. Create a branch from the released `main`: switch to `main` and **Pull** (as in
-   Deliverable 5), then status bar branch name -> **+ Create new branch...** ->
-   `readme-pages`.
+`main` is protected, so this small change also goes through a pull request.
 
-   <details><summary>Terminal</summary>
-
-   ```bash
-   git switch main
-   git pull
-   git switch -c readme-pages
-   ```
-
-   </details>
-
-2. Open `README.md` in VS Code. Directly under the `# ...` title line, add two badges, one
-   for the release and one linking to your site, replacing `<owner>` with your GitHub user or organization and `<repo>` with the
-   repo name (both appear in your repo's URL, `https://github.com/<owner>/<repo>`):
+1. From an up-to-date `main`, create a branch named `readme-pages`.
+2. In `README.md`, directly under the title, add these two lines. Replace `<owner>` and
+   `<repo>` with the parts of your repo's URL, `https://github.com/<owner>/<repo>`:
 
    ```markdown
    [![Release](https://img.shields.io/github/v/release/<owner>/<repo>)](https://github.com/<owner>/<repo>/releases/latest)
    [![Live Site](https://img.shields.io/badge/Live-Site-brightgreen)](https://<owner>.github.io/<repo>/)
    ```
 
-   If your README already has a static badge (like Sierra's
-   `![Release](https://img.shields.io/badge/Release-v0.1.0-blue)`), replace it with the release
-   badge above, which updates itself with each new release.
-3. Preview it: right-click `README.md` -> **Open Preview** (or `Cmd/Ctrl+Shift+V`). The release
-   badge should read **release v1.0.0**, next to a green **Live Site** badge.
-4. Commit and push: in **Source Control**, stage `README.md`, type *Link GitHub Pages and
-   add release badge*, click **Commit**, then **Publish Branch**.
+   If your README already has a fixed badge (like Sierra's old
+   `img.shields.io/badge/Release-v0.1.0-blue`), replace it with the release badge above.
+3. Preview it (`Cmd/Ctrl+Shift+V`): you should see **release v1.0.0** and a green
+   **Live Site** badge.
+4. Commit, **Publish Branch**, then open a pull request, review it, and merge it, as in
+   Deliverable 6.
+5. On your repo's GitHub page, confirm both badges show and **Live Site** opens your site.
 
-   <details><summary>Terminal</summary>
+This change comes after `v1.0.0`, so it is not part of the release. That is expected: do not
+move the tag for it.
 
-   ```bash
-   git commit -am "Link GitHub Pages and add release badge"
-   git push -u origin readme-pages
-   ```
-
-   </details>
-
-5. Open a pull request into `main`, wait for CI to pass, review it with a **Comment**, and
-   merge, as in Deliverable 6 steps 2 to 7.
-6. Open the repo's main page on GitHub and confirm the release badge shows `v1.0.0`
-   and clicking **Live Site** opens your site.
-
-#### Tips
-
-- This change comes **after** `v1.0.0`, so it is not part of the release. That is expected:
-  do not move the tag for a README change.
-- If the badge reads *no releases or repo not found*, the release is still a draft or the
-  repo is private.
-
-### Deliverable 9: Final report
+#### Deliverable 9: Write the final report
 
 The final report closes the course. Revisit the engineering questions from
 [Project 1](Week1.md#project-1-week-1-project-scope-problem-statement) (Section 3), answer
-them using the analyses developed in the method, and **trace every conclusion to the approved
-1.0.0 release**. Then write your reflection on the whole approach.
+them using the analyses developed in the method, and **trace every conclusion to the
+approved 1.0.0 release**. Then reflect on the whole approach.
 
-For each Module 1 question:
+For each Module 1 question, give:
 
 | Part | What to include |
 | --- | --- |
-| Question | The question as written in Project 1, and its stakeholder. If you revised it since, give both versions and why. |
-| Evidence | The query, view, analysis, or generated product that answers it, as a file path **at tag `v1.0.0`** (or a GitHub permalink to it) |
-| Answer | The result, as computed from the release, and what it tells the stakeholder |
-| Or a gap | If it cannot be answered, the diagnosed gap and its source (vocabulary, pattern, process, or outside the model), as in Week 5 |
+| Question | The question from Project 1 and its stakeholder. If you revised it, give both versions and why. |
+| Evidence | The query, view, analysis, or generated product that answers it, linked **at tag `v1.0.0`** |
+| Answer | The result, computed from the release, and what it tells the stakeholder |
+| *or* Gap | If it cannot be answered, the diagnosed gap and its source (vocabulary, pattern, process, or outside the model), as in Week 5 |
 
-Then the **reflection** (1-2 pages): what the approach made easier or harder than how you
-work today, which capability mattered most (vocabularies, reasoning, methodology, analysis,
-agents, generation, CI/CD), what you would change in your method, and what you would need
-to use it on a real program.
+Link evidence as `https://github.com/<owner>/<repo>/blob/v1.0.0/<path>`, so it points at the
+released file rather than whatever `main` holds later. Your Week 5 `ANALYSIS.md` is a good
+starting point. A diagnosed gap is a finding, not a failure.
 
-#### Tips
+Then write a **reflection** (1-2 pages):
 
-- **Permalinks prove traceability.** Use links of the form
-  `https://github.com/<owner>/<repo>/blob/v1.0.0/<path>` so each piece of evidence points at
-  the released content, not at whatever `main` holds later.
-- **A diagnosed gap is a finding**, not a failure. Say what blocks the answer and what would
-  fix it.
-- Reuse your Week 5 `ANALYSIS.md` as a starting point, updated to the release.
+- What did the approach make easier or harder than how you work today?
+- Which capability mattered most: vocabularies, reasoning, methodology, analysis, agents,
+  generation, or CI/CD?
+- What would you change in your method?
+- What would you need to use it on a real program?
 
 ---
 
 ## Submitting Project 4
 
-Push everything, then submit **Project 4** on the **UofA learning platform** as one document
-covering Weeks 6, 7, and 8:
+Push everything, then submit **Project 4** on **your school's course platform** as one
+document covering Weeks 6, 7, and 8.
 
-- **Week 6:** the project repo URL, the commit hash of the adjusted skill, the chat logs and
-  git-change screenshots from rounds 1-3, and the round 4 report and chat log.
-- **Week 7:** the URLs and commit hashes of the methodology repo and the example repo, the
-  description of the generator, package, and consumer, and the evidence for each step.
-- **Week 8:**
-  - Screenshots of the secret (name only, never the value), the branch rule, and the rejected
-    direct push to `main`.
-  - The **pull request URL**, the **four commit hashes** with the CI result of each, and
-    screenshots of each CI run and of the review comment and merge.
-  - The **release URL**, the **commit hash tagged `v1.0.0`**, the CD run, and the **GitHub
-    Pages URL**.
-  - The final report: one answer or diagnosed gap per Module 1 question, traced to `v1.0.0`,
-    and your reflection.
+**Week 6:** the project repo URL, the commit hash of the adjusted skill, the chat logs and
+git-change screenshots from rounds 1-3, and the round 4 report and chat log.
+
+**Week 7:** the URLs and commit hashes of the methodology repo and the example repo, the
+description of the generator, package, and consumer, and the evidence for each step.
+
+**Week 8:**
+
+- [ ] Screenshots: the secret (name only), the branch rule, and the rejected direct push
+- [ ] The pull request URL, the four commit hashes with the CI result of each, and the CI
+      screenshots
+- [ ] Screenshots of your review comment and the merged pull request
+- [ ] The release URL, the commit hash tagged `v1.0.0`, and screenshots of the CD run and
+      the live site
+- [ ] Your GitHub Pages URL
+- [ ] The final report: an answer or a diagnosed gap for each Module 1 question, traced to
+      `v1.0.0`, and your reflection

@@ -103,8 +103,7 @@ Work in your `sierra-method` fork.
 
 ### Submitting
 
-Push your work to your `sierra-method` fork, then submit a document on the **UofA learning
-platform** with your **fork URL**, the **commit hash**, and a **report** containing the rest
+Push your work to your `sierra-method` fork, then submit a document on **your school's course platform** with your **fork URL**, the **commit hash**, and a **report** containing the rest
 of the asks (screen capture, answer comparison, observations, and chat logs).
 
 ---

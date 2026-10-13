@@ -126,7 +126,7 @@ deviated somewhere - that is the feedback loop, and it is faster than reading yo
 1. Commit your changes to your fork with a descriptive message.
 2. `git push`.
 3. Copy the **commit hash** - GitHub shows it on the commit page.
-4. On the **UofA learning platform**, submit a document stating two things: the **URL of your
+4. On **your school's course platform**, submit a document stating two things: the **URL of your
    public fork** and the **commit hash** of your submission.
 
 I clone your fork, check out your hash, run the three gates, read your OML, and look at your
@@ -253,8 +253,7 @@ usable** - this lecture's and the next one's.
 
 ### Submitting
 
-Same mechanism as Assignment 2: push your work, then submit a document on the **UofA learning
-platform** stating your **project repo URL** and the **commit hash**. Going forward you keep two
+Same mechanism as Assignment 2: push your work, then submit a document on **your school's course platform** stating your **project repo URL** and the **commit hash**. Going forward you keep two
 repos - your `sierra-method` fork for assignments, and your project repo - and every delivery is
 a document naming a URL and a hash.
 

@@ -57,8 +57,7 @@ Study with running example: Sierra Method + Fire Force system description.
 
 ### Submitting
 
-Push your work to your `sierra-method` fork, then submit a document on the **UofA learning
-platform** with your **fork URL** and the **commit hash**.
+Push your work to your `sierra-method` fork, then submit a document on **your school's course platform** with your **fork URL** and the **commit hash**.
 
 ---
 

@@ -182,8 +182,7 @@ oml install @modelware/sierra-method@<your-version> -r http://localhost:4873
 
 ### Submitting
 
-Push your work to your `sierra-method` fork, then submit a document on the **UofA learning
-platform** with:
+Push your work to your `sierra-method` fork, then submit a document on **your school's course platform** with:
 
 - Your **fork URL** and the **commit hash** of the generator (Part 1).
 - The content of the generated `MissionControlDashboard-transitions.md`, and how you verified

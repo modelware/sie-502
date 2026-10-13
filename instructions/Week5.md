@@ -83,8 +83,7 @@ Study with running example: Sierra Method + Fire Force system description.
 
 ### Submitting
 
-Push your work to your `sierra-method` fork, then submit a document on the **UofA learning
-platform** with your **fork URL**, the **commit hash**, the **path to your analysis
+Push your work to your `sierra-method` fork, then submit a document on **your school's course platform** with your **fork URL**, the **commit hash**, the **path to your analysis
 notebook**, and a **short reflection**.
 
 ---
@@ -117,6 +116,6 @@ Activity."*
 
 ### Submitting
 
-Push the cumulative Week 4-5 work, then submit **Project 3** on the **UofA learning platform**
+Push the cumulative Week 4-5 work, then submit **Project 3** on **your school's course platform**
 with your **project repo URL** and the **latest commit hash that contains both the Week 4
 methodology and Week 5 analysis work**.

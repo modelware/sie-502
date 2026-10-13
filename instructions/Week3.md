@@ -239,7 +239,7 @@ Then answer: why does this need a **rule** rather than a property chain or a res
 
 ### Submitting
 
-Submit a **report** (PDF or DOCX) on the **UofA learning platform** containing your eight
+Submit a **report** (PDF or DOCX) on **your school's course platform** containing your eight
 screenshots and explanations. Unlike Assignment 2, no repo URL or commit hash is needed -
 these are throwaway experiments you revert.
 
@@ -271,7 +271,7 @@ where the vocabularies and descriptions live, and how to build it.
 
 ### Submitting
 
-Push your work, then submit a document on the **UofA learning platform** with your **project
+Push your work, then submit a document on **your school's course platform** with your **project
 repo URL** and the **commit hash**.
 
 ---

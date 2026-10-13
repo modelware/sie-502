@@ -34,7 +34,10 @@ local clone in VS Code (**File -> Open Folder...**), and in the **Source Control
 (`Ctrl+Shift+G`) click **...** -> **Pull**.
 
 Then **File -> Open Folder...** on your **project repo**. Run every `oml` command from VS
-Code's **integrated terminal** (**Terminal -> New Terminal**).
+Code's **integrated terminal** (**Terminal -> New Terminal**) in that repo. The OML Code
+extension has already launched the OML server for the workspace, so the commands use it
+directly: you do not need `oml start` or `oml stop` locally (only the CI and CD workflows
+start their own).
 
 ### Step 3: Know the two workflows Sierra ships
 
@@ -129,11 +132,9 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 2. Run all three gates locally, so CI confirms what you already know:
 
    ```bash
-   oml start
    oml lint
    oml validate --only
    oml reason --only
-   oml stop
    ```
 
    `oml validate` and `oml reason` each run lint first by default. `--only` skips that
@@ -179,12 +180,10 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
    Change `-m` to your Markdown folder and `-c` to your own bundle. Keep `-b build/web`
    (the folder `cd.yml` uploads).
-3. Render locally and check the site:
+3. Render locally from the integrated terminal and check the site:
 
    ```bash
-   oml start
    oml render
-   oml stop
    ```
 
    Open `build/web/index.html` in a browser and click through a few pages.

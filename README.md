@@ -15,6 +15,7 @@ two tracks: **assignments**, which exercise the shared `sierra-method` running e
 | 5 | Methodology II: Queries, Views, and Analysis | [Week5.md](instructions/Week5.md) |
 | 6 | AI Agents over OML | [Week6.md](instructions/Week6.md) |
 | 7 | Generate, Publish, and Consume | [Week7.md](instructions/Week7.md) |
+| 8 | The Capstone Release | [Week8.md](instructions/Week8.md) |
 
 ## Key Links
 

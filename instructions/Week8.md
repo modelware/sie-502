@@ -29,16 +29,12 @@ oml -v
 
 ### Step 2: Sync your `sierra-method` fork
 
-On **your fork's** GitHub page: click **Sync fork** -> **Update branch**. Then pull it
-locally:
+On **your fork's** GitHub page: click **Sync fork** -> **Update branch**. Then open your
+local clone in VS Code (**File -> Open Folder...**), and in the **Source Control** view
+(`Ctrl+Shift+G`) click **...** -> **Pull**.
 
-```bash
-git pull
-git status
-```
-
-Then **File -> Open Folder...** on your **project repo** and run every command from VS Code's
-**integrated terminal**.
+Then **File -> Open Folder...** on your **project repo**. Run every `oml` command from VS
+Code's **integrated terminal** (**Terminal -> New Terminal**).
 
 ### Step 3: Know the two workflows Sierra ships
 
@@ -46,7 +42,7 @@ Sierra already has both workflows. Study them before copying them into your proj
 
 | File | Runs on | What it does |
 | --- | --- | --- |
-| `.github/workflows/ci.yml` | Every push to `main` and every pull request into `main` | Signs in, starts the server, then runs three gates: `oml lint`, `oml validate`, `oml reason` |
+| `.github/workflows/ci.yml` | Every push to `main` and every pull request into `main` | Signs in, starts the server, then runs three gates: `oml lint`, `oml validate --only`, `oml reason --only` |
 | `.github/workflows/cd.yml` | Every pushed tag matching `v*.*.*` | Signs in, starts the server, runs `oml render`, and deploys `build/web` to GitHub Pages |
 
 Both read the `OML_PLATFORM_API_KEY` secret to sign in to OML (`oml whoami` checks it).
@@ -56,8 +52,25 @@ The three CI gates catch different problems:
 | Gate | Command | Fails when |
 | --- | --- | --- |
 | Lint | `oml lint` | An OML file has a syntax error or an OML validation error (for example an unresolved reference) |
-| Validate | `oml validate` | A table-editor SHACL block in a Markdown file is violated (for example a required field is missing) |
-| Reason | `oml reason` | The model is logically inconsistent (for example an instance typed by two disjoint concepts) |
+| Validate | `oml validate --only` | A table-editor SHACL block in a Markdown file is violated (for example a required field is missing) |
+| Reason | `oml reason --only` | The model is logically inconsistent (for example an instance typed by two disjoint concepts) |
+
+### Step 4: Know where git lives in VS Code
+
+Every git step this week can be done from VS Code's UI. The steps below give the clicks
+first, with the terminal commands in a collapsed **Terminal** block if you prefer them.
+
+| To do this | In VS Code |
+| --- | --- |
+| See your changes | Open the **Source Control** view: the branch icon in the Activity Bar, or `Ctrl+Shift+G` |
+| Stage | Hover over the **Changes** header (all files) or one file, and click **+** |
+| Commit | Type a message in the box at the top of Source Control and click **Commit** |
+| Push or pull | Click **Sync Changes** (or **Publish Branch** for a new branch), or **...** -> **Push** / **Pull** |
+| Create or switch branches | Click the branch name in the **status bar** (bottom left), then pick a branch or **+ Create new branch...** |
+| Create and push a tag | Command Palette (`Cmd/Ctrl+Shift+P`) -> **Git: Create Tag**, then **Git: Push Tags** |
+| Undo your last commit | **...** -> **Commit** -> **Undo Last Commit** (the changes come back as uncommitted) |
+| Find a commit hash | The **Graph** section at the bottom of Source Control: hover over a commit |
+| Read a push error | When VS Code reports a git error, click **Show Command Output** |
 
 ---
 
@@ -126,13 +139,19 @@ engineering model. Work in your **project repo** (the methodology repo from Week
    `oml validate` and `oml reason` each run lint first by default. `--only` skips that
    repeat, since you just ran `oml lint`.
 
-3. Commit and push to `main` (it is not protected yet):
+3. Commit and push to `main` (it is not protected yet). In **Source Control**, stage
+   `.github/workflows/ci.yml` (**+**), type the message *Add CI workflow*, click **Commit**,
+   then **Sync Changes**.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git add .github/workflows/ci.yml
    git commit -m "Add CI workflow"
    git push
    ```
+
+   </details>
 
 4. On GitHub, click the **Actions** tab. Click the **CI** run that just started, then the
    **build** job, and expand each step to watch it. Wait for a green check.
@@ -169,13 +188,18 @@ engineering model. Work in your **project repo** (the methodology repo from Week
    ```
 
    Open `build/web/index.html` in a browser and click through a few pages.
-4. Commit and push to `main`:
+4. Commit and push to `main`. In **Source Control**, stage `.github/workflows/cd.yml` and
+   `.oml/settings.yml`, type *Add CD workflow*, click **Commit**, then **Sync Changes**.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git add .github/workflows/cd.yml .oml/settings.yml
    git commit -m "Add CD workflow"
    git push
    ```
+
+   </details>
 
 5. On GitHub, enable Pages: **Settings** -> **Pages** (left sidebar, under **Code and
    automation**) -> **Build and deployment** -> **Source**: choose **GitHub Actions** from the
@@ -215,18 +239,23 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
 6. Click **Create** at the bottom of the page.
 7. Confirm the rule works by trying to push directly to `main`:
+   1. Make a throwaway edit (for example add a blank line at the end of `README.md`).
+   2. In **Source Control**, stage it, type *Test branch protection*, click **Commit**, then
+      **Sync Changes**.
+   3. VS Code reports that the push failed. Click **Show Command Output** to see GitHub's
+      rejection (*"push declined due to repository rule violations"*). Take a screenshot.
+   4. Drop the test commit: **...** -> **Commit** -> **Undo Last Commit**. Then right-click
+      `README.md` under **Changes** -> **Discard Changes**.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git commit --allow-empty -m "Test branch protection"
-   git push
+   git push                     # rejected; screenshot the message
+   git reset --hard HEAD~1      # drop the test commit
    ```
 
-   The push is rejected with a message that the branch is protected. Take a screenshot, then
-   drop the test commit:
-
-   ```bash
-   git reset --hard HEAD~1
-   ```
+   </details>
 
 #### Tips
 
@@ -246,19 +275,23 @@ engineering model. Work in your **project repo** (the methodology repo from Week
 
 ### Deliverable 5: Feature branch
 
-1. Start from an up-to-date `main` and create the branch:
+1. Start from an up-to-date `main`: click the branch name in the status bar (bottom left)
+   and pick `main`, then in **Source Control** click **...** -> **Pull**.
+2. Create the branch: click the branch name again -> **+ Create new branch...**, type
+   `release-1.0.0`, and press Enter. The status bar now shows `release-1.0.0`.
+3. Push it to GitHub, so it exists there before your first commit: click **Publish Branch**
+   in **Source Control** (or the cloud icon next to the branch name in the status bar).
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git switch main
    git pull
    git switch -c release-1.0.0
-   ```
-
-2. Push it to GitHub, so it exists there before your first commit:
-
-   ```bash
    git push -u origin release-1.0.0
    ```
+
+   </details>
 
 ### Deliverable 6: Commit pushing
 
@@ -272,14 +305,20 @@ each one**:
 | 3 | Fix commit 2, and make the model inconsistent (for example type an instance by two disjoint concepts) | Passes Linting and Validating, fails at **Reasoning** |
 | 4 | Fix commit 3, and set `project.version` to `1.0.0` in `.oml/settings.yml` | **All gates pass** |
 
-1. Make the commit 1 change, run the gates locally to confirm it fails where you intend,
-   then commit and push:
+1. Make the commit 1 change and run the gates locally to confirm it fails where you
+   intend. Then in **Source Control**, stage the change, type *Break lint*, click
+   **Commit**, then **Sync Changes**. Record the commit hash from the **Graph** section
+   (hover over the commit).
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git commit -am "Break lint"
    git push
    git rev-parse --short HEAD    # record this hash
    ```
+
+   </details>
 
 2. Open a pull request. On the repo's GitHub page, click **Compare & pull request** in the
    yellow banner (or **Pull requests** -> **New pull request**). Set **base** to `main` and
@@ -312,6 +351,14 @@ each one**:
 
 1. Tag the **good commit as it landed on `main`** (the merge commit, which contains commit
    4) and push the tag:
+   1. Switch to `main` (status bar branch name -> `main`) and **...** -> **Pull**.
+   2. In the **Graph** section, confirm the top commit is your merge commit
+      (*Merge pull request #...*) and record its hash.
+   3. Command Palette (`Cmd/Ctrl+Shift+P`) -> **Git: Create Tag**. Type `v1.0.0` and press
+      Enter, then type the message *Release 1.0.0* and press Enter.
+   4. Command Palette -> **Git: Push Tags**. The tag now appears on GitHub under **Tags**.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git switch main
@@ -320,6 +367,8 @@ each one**:
    git tag -a v1.0.0 -m "Release 1.0.0"
    git push origin v1.0.0
    ```
+
+   </details>
 
 2. On the repo's GitHub page, click **Releases** in the right sidebar (or go to
    `https://github.com/<owner>/<repo>/releases`), then **Draft a new release**.
@@ -345,13 +394,19 @@ each one**:
 
 Since `main` is protected, the README change also goes through a pull request.
 
-1. Create a branch from the released `main`:
+1. Create a branch from the released `main`: switch to `main` and **Pull** (as in
+   Deliverable 5), then status bar branch name -> **+ Create new branch...** ->
+   `readme-pages`.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git switch main
    git pull
    git switch -c readme-pages
    ```
+
+   </details>
 
 2. Open `README.md` in VS Code. Directly under the `# ...` title line, add two badges, one
    for the release and one linking to your site, replacing `<owner>` with your GitHub user or organization and `<repo>` with the
@@ -367,12 +422,17 @@ Since `main` is protected, the README change also goes through a pull request.
    badge above, which updates itself with each new release.
 3. Preview it: right-click `README.md` -> **Open Preview** (or `Cmd/Ctrl+Shift+V`). The release
    badge should read **release v1.0.0**, next to a green **Live Site** badge.
-4. Commit and push:
+4. Commit and push: in **Source Control**, stage `README.md`, type *Link GitHub Pages and
+   add release badge*, click **Commit**, then **Publish Branch**.
+
+   <details><summary>Terminal</summary>
 
    ```bash
    git commit -am "Link GitHub Pages and add release badge"
    git push -u origin readme-pages
    ```
+
+   </details>
 
 5. Open a pull request into `main`, wait for CI to pass, review it with a **Comment**, and
    merge, as in Deliverable 6 steps 2 to 7.

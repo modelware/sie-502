@@ -119,9 +119,12 @@ engineering model. Work in your **project repo** (the methodology repo from Week
    oml start
    oml lint
    oml validate --only
-   oml reason
+   oml reason --only
    oml stop
    ```
+
+   `oml validate` and `oml reason` each run lint first by default. `--only` skips that
+   repeat, since you just ran `oml lint`.
 
 3. Commit and push to `main` (it is not protected yet):
 
